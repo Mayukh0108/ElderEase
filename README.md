@@ -29,7 +29,7 @@ Elderly individuals often face the following challenges:
 ### 2️⃣ Medical History & Health Tracking 🏥
 - Stores & updates **medical records.**
 - **Appointment & medication reminders.**
-- **IoT wearable integration** (Apple Health, Fitbit API).
+- **IoT wearable integration** (Apple Health, Fitbit API). (Future Prospect)
 - AI-based **health anomaly detection.**
 
 ### 3️⃣ Daily Activity & Task Management 📆
@@ -63,15 +63,16 @@ Elderly individuals often face the following challenges:
 ## 🔧 Tech Stack
 | **Component** | **Technology Used** |
 |--------------|------------------|
-| Frontend 🎨 | React Native, React.js |
+| Frontend 🎨 | HTML , CSS , JS |
 | Backend 🔧 | Node.js (Express.js) |
-| Database 🗄️ | PostgreSQL / MongoDB |
-| AI/ML 🤖 | Python (TensorFlow, OpenCV) |
-| APIs 📡 | Twilio, Google Maps |
-| Security 🔐 | Firebase Auth, OAuth 2.0 |
+| Database 🗄️ | MongoDB |
+| APIs 📡 | Twilio, Zegocloud API |
+| Security 🔐 | OAuth 2.0 |
 
 ## 🏗️ System Architecture Overview
-![Architecture Diagram](https://your-image-url.com)
+
+![image](https://github.com/user-attachments/assets/0d7a69b8-42a3-4009-a049-c989bd6d8ca6)
+
 
 ## 🔥 Competitor Analysis
 | Competitor | Key Features | Pricing | Weaknesses |
@@ -96,7 +97,7 @@ Elderly individuals often face the following challenges:
 ## 🔐 Security & Compliance
 - **End-to-end encryption** to ensure **data privacy.**
 - **GDPR & HIPAA compliance** for healthcare data protection.
-- **Secure authentication** using Firebase Auth & OAuth 2.0.
+- **Secure authentication** using OAuth 2.0.
 
 ## 🌎 How to Run the Project Locally
 ```bash
@@ -105,11 +106,8 @@ git clone https://github.com/Mayukh0108/Elderly-care
 cd Elderly-care
 
 # Install dependencies
-npm install  # for frontend
-yarn install  # for backend
-
-# Start frontend
-yarn start
+npm install  # for backend
+Open With Liver Server #for frontend
 
 # Start backend
 node server.js
