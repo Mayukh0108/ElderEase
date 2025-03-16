@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elder Care Profile</title>
+    <style>
+        :root {
+            --yellow: #FFD700;
+            --dark-pink: #FF1493;
+            --pink: #FFC0CB;
+            --light-gray: #f5f5f5;
+            --dark-gray: #333;
+            --white: #fff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+        }
+        
+        .container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        /* Sidebar styles */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, var(--dark-pink), var(--pink));
+            color: var(--white);
+            padding: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+        
+        .profile-img-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--yellow);
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .profile-info {
+            margin-bottom: 25px;
+        }
+        
+        .profile-info h2 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            text-align: center;
+            color: var(--yellow);
+        }
+        
+        .profile-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 5px;
+            border-radius: 5px;
+            transition: all 0.2s;
+        }
+        
+        .profile-item i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            color: var(--yellow);
+        }
+        
+        .auth-section {
+            background-color: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .auth-section h3 {
+            color: var(--yellow);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+        
+        .auth-button {
+            display: inline-block;
+            background-color: var(--yellow);
+            color: var(--dark-gray);
+            padding: 8px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s;
+            text-align: center;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .auth-button:hover {
+            background-color: #e6c200;
+            transform: translateY(-2px);
+        }
+        
+        /* Main content area */
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background-color: var(--white);
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--pink);
+        }
+        
+        .header h1 {
+            color: var(--dark-pink);
+            font-size: 1.8rem;
+        }
+        
+        .notification-icon {
+            font-size: 1.5rem;
+            color: var(--dark-pink);
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--yellow);
+            color: var(--dark-gray);
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .section {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .section-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--pink);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .section-icon i {
+            color: var(--dark-pink);
+            font-size: 1.3rem;
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--dark-pink);
+        }
+        
+        /* Medications section */
+        .medication-list {
+            list-style: none;
+        }
+        
+        .medication-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid #eeeeee;
+            transition: all 0.2s;
+        }
+        
+        .medication-item:hover {
+            background-color: #f9f9f9;
+        }
+        
+        .medication-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .medication-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+        }
+        
+        .medication-icon i {
+            color: var(--dark-gray);
+        }
+        
+        .medication-details h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        
+        .medication-details p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        .medication-time {
+            background-color: var(--pink);
+            color: var(--dark-pink);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        /* History section */
+        .history-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eeeeee;
+        }
+        
+        .history-date {
+            min-width: 80px;
+            padding: 5px;
+            background-color: var(--yellow);
+            border-radius: 5px;
+            text-align: center;
+            margin-right: 15px;
+            font-weight: bold;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+        }
+        
+        .history-content h4 {
+            margin-bottom: 5px;
+            color: var(--dark-pink);
+        }
+        
+        .history-content p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* Daily Activities */
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+        }
+        
+        .activity-card {
+            background: linear-gradient(135deg, var(--pink), #ffe6ea);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .activity-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+        }
+        
+        .activity-icon i {
+            font-size: 1.3rem;
+            color: var(--dark-pink);
+        }
+        
+        .activity-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: var(--dark-gray);
+        }
+        
+        .activity-time {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+        
+        .activity-status {
+            margin-top: 10px;
+            padding: 5px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-completed {
+            background-color: #d4f7d4;
+            color: #28a745;
+        }
+        
+        .status-pending {
+            background-color: #fff3cd;
+            color: #ffc107;
+        }
+        
+        .status-missed {
+            background-color: #f8d7da;
+            color: #dc3545;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                padding-bottom: 10px;
+            }
+            
+            .profile-info {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .profile-item {
+                width: 48%;
+            }
+            
+            .activities-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar with profile info -->
+        <div class="sidebar">
+            <div class="profile-img-container">
+                <img src="./images/pfpEE.svg" alt="Profile Picture" class="profile-img">
+            </div>
+            
+            <div class="profile-info">
+                <h2>MANJU CHOWDHURY</h2>
+                
+                <div class="profile-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>arpanchowd003@gmail.com</span>
+                </div>
+                
+                <div class="profile-item">
+                    <i class="fas fa-id-card"></i>
+                    <span>Elder ID: ELDER-10042</span>
+                </div>
+                
+                <div class="profile-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(+91) 458-456778</span>
+                </div>
+                
+                <div class="profile-item">
+                    <i class="fas fa-calendar"></i>
+                    <span>DOB: 05/12/1950</span>
+                </div>
+                
+                <div class="profile-item">
+                    <i class="fas fa-user-md"></i>
+                    <span>Dr. SOUMYAJIT DUTTA</span>
+                </div>
+            </div>
+            
+            <div class="auth-section">
+                <h3><i class="fas fa-lock"></i> Authentication</h3>
+                
+                <div class="profile-item">
+                    <i class="fas fa-key"></i>
+                    <span>Password: ••••••••</span>
+                </div>
+                
+                <a href="#" class="auth-button">
+                    <i class="fas fa-edit"></i> Change Password
+                </a>
+                
+                <a href="#" class="auth-button" style="margin-top: 10px;">
+                    <i class="fas fa-shield-alt"></i> Two-Factor Auth
+                </a>
+            </div>
+        </div>
+        
+        <!-- Main content area -->
+        <div class="main-content">
+            <div class="header">
+                <h1>Personal Dashboard</h1>
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </div>
+            </div>
+            
+            <!-- Medications Section -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h2 class="section-title">Medications</h2>
+                </div>
+                
+                <ul class="medication-list">
+                    <li class="medication-item">
+                        <div class="medication-info">
+                            <div class="medication-icon">
+                                <i class="fas fa-capsules"></i>
+                            </div>
+                            <div class="medication-details">
+                                <h4>Lisinopril</h4>
+                                <p>10mg - For blood pressure</p>
+                            </div>
+                        </div>
+                        <span class="medication-time">8:00 AM</span>
+                    </li>
+                    
+                    <li class="medication-item">
+                        <div class="medication-info">
+                            <div class="medication-icon">
+                                <i class="fas fa-tablets"></i>
+                            </div>
+                            <div class="medication-details">
+                                <h4>Simvastatin</h4>
+                                <p>20mg - For cholesterol</p>
+                            </div>
+                        </div>
+                        <span class="medication-time">7:00 PM</span>
+                    </li>
+                    
+                    <li class="medication-item">
+                        <div class="medication-info">
+                            <div class="medication-icon">
+                                <i class="fas fa-prescription-bottle"></i>
+                            </div>
+                            <div class="medication-details">
+                                <h4>Metformin</h4>
+                                <p>500mg - For diabetes</p>
+                            </div>
+                        </div>
+                        <span class="medication-time">2:00 PM</span>
+                    </li>
+                    
+                    <li class="medication-item">
+                        <div class="medication-info">
+                            <div class="medication-icon">
+                                <i class="fas fa-pills"></i>
+                            </div>
+                            <div class="medication-details">
+                                <h4>Vitamin D</h4>
+                                <p>1000 IU - Supplement</p>
+                            </div>
+                        </div>
+                        <span class="medication-time">9:00 AM</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Medical History Section -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h2 class="section-title">Medical History</h2>
+                </div>
+                
+                <div class="history-item">
+                    <div class="history-date">Jan 15</div>
+                    <div class="history-content">
+                        <h4>Annual Physical Examination</h4>
+                        <p>Dr. Brown noted normal vitals. Blood pressure: 128/85. Weight: 145 lbs.</p>
+                    </div>
+                </div>
+                
+                <div class="history-item">
+                    <div class="history-date">Dec 3</div>
+                    <div class="history-content">
+                        <h4>Medication Adjustment</h4>
+                        <p>Lisinopril reduced from 20mg to 10mg daily.</p>
+                    </div>
+                </div>
+                
+                <div class="history-item">
+                    <div class="history-date">Nov 18</div>
+                    <div class="history-content">
+                        <h4>Flu Vaccination</h4>
+                        <p>Received seasonal influenza vaccine. No adverse reactions reported.</p>
+                    </div>
+                </div>
+                
+                <div class="history-item">
+                    <div class="history-date">Oct 5</div>
+                    <div class="history-content">
+                        <h4>Eye Examination</h4>
+                        <p>Minor cataract development noted. Follow-up in 6 months recommended.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Daily Activities Section -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h2 class="section-title">Daily Activities</h2>
+                </div>
+                
+                <div class="activities-grid">
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-walking"></i>
+                        </div>
+                        <div class="activity-name">Morning Walk</div>
+                        <div class="activity-time">8:30 AM</div>
+                        <div class="activity-status status-completed">Completed</div>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="activity-name">Lunch</div>
+                        <div class="activity-time">12:30 PM</div>
+                        <div class="activity-status status-completed">Completed</div>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="activity-name">Puzzle Time</div>
+                        <div class="activity-time">2:00 PM</div>
+                        <div class="activity-status status-pending">Pending</div>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="activity-name">BP Check</div>
+                        <div class="activity-time">4:00 PM</div>
+                        <div class="activity-status status-pending">Pending</div>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                        <div class="activity-name">Reading</div>
+                        <div class="activity-time">5:30 PM</div>
+                        <div class="activity-status status-pending">Pending</div>
+                    </div>
+                    
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="activity-name">Social Call</div>
+                        <div class="activity-time">10:00 AM</div>
+                        <div class="activity-status status-missed">Missed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Notifications toggle
+            const notificationIcon = document.querySelector('.notification-icon');
+            notificationIcon.addEventListener('click', function() {
+                alert('You have 3 new notifications:\n- Medication reminder: Lisinopril at 8:00 AM\n- Doctor appointment tomorrow at 10:00 AM\n- Weekly health report available');
+            });
+            
+            // Make medication items interactive
+            const medicationItems = document.querySelectorAll('.medication-item');
+            medicationItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const medName = this.querySelector('h4').textContent;
+                    const medDetails = this.querySelector('p').textContent;
+                    alert(`${medName}\n${medDetails}\n\nLast taken: Today at ${this.querySelector('.medication-time').textContent}\nRefills remaining: 3`);
+                });
+            });
+            
+            // Activity status update
+            const activityCards = document.querySelectorAll('.activity-card');
+            activityCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const status = this.querySelector('.activity-status');
+                    if (status.classList.contains('status-pending')) {
+                        status.classList.remove('status-pending');
+                        status.classList.add('status-completed');
+                        status.textContent = 'Completed';
+                        
+                        // Show confirmation
+                        const activityName = this.querySelector('.activity-name').textContent;
+                        alert(`${activityName} marked as completed!`);
+                    }
+                });
+            });
+            
+            // Authentication buttons
+            const authButtons = document.querySelectorAll('.auth-button');
+            authButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const action = this.textContent.trim();
+                    if (action.includes('Change Password')) {
+                        alert('Password change form will appear here.\nPlease enter your current password and new password.');
+                    } else if (action.includes('Two-Factor')) {
+                        alert('Two-factor authentication setup:\n1. Install an authenticator app\n2. Scan the QR code\n3. Enter the verification code');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

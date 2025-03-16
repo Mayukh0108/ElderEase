@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="./images/nursing-home.png">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>ElderEase</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="accessibility-bar">
+      <button class="accessibility-btn" onclick="toggleScreenReader()">
+        👁️ Screen Reader
+      </button>
+      <button class="accessibility-btn" onclick="toggleLanguage()">
+        🌐 Language
+      </button>
+      <button class="accessibility-btn" onclick="adjustFontSize(1)">A+</button>
+      <button class="accessibility-btn" onclick="adjustFontSize(-1)">A-</button>
+    </div>
+
+    <nav class="navbar">
+      <div class="nav-content">
+        <a href="#" class="logo">ElderEase</a>
+        <div class="nav-links">
+          <a href="#" class="nav-link">Home</a>
+          <a href="#" class="nav-link">Features</a>
+          <a href="#" class="nav-link">About Us</a>
+          <a href="#" class="nav-link">Contact</a>
+        </div>
+        <div class="auth-buttons" id="authButtons">
+          <a href="auth.html" class="auth-btn sign-up" id="signUpBtn">Sign Up</a>
+      </div>
+      
+      <div class="profile-section" id="profileSection">
+          <div class="profile-icon" onclick="toggleProfileDropdown()">
+              <div id="greetingText"></div>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" 
+                   stroke="#FF69B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" 
+                   class="profile-user-icon">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+              </svg> 
+          </div>
+          <div class="profile-dropdown" id="profileDropdown">
+              <a href="profile.html"><i data-lucide="user"></i> My Profile</a>
+              <a href=""><i data-lucide="settings"></i> Settings</a>
+              <a href="#" onclick="handleSignOut()"><i data-lucide="log-out"></i> Sign Out</a>
+          </div>
+      </div>
+      
+        </div>
+      </div>
+    </nav>
+
+
+
+  <div class="login-notification" id="loginNotification">
+        <i data-lucide="check-circle"></i> Successfully signed in!
+    </div>
+
+    <script>
+        // Function to simulate sign in (for demo purposes)
+        document.addEventListener('DOMContentLoaded', function() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const authButtons = document.getElementById('authButtons');
+    const profileSection = document.getElementById('profileSection');
+    const greetingText = document.getElementById('greetingText');
+
+    if (user && user._id) {
+        // Show profile section
+        authButtons.style.display = 'none';
+        profileSection.style.display = 'flex';
+        greetingText.textContent = `Hi ${user.username}! `;
+    } else {
+        // Show auth buttons
+        authButtons.style.display = 'flex';
+        profileSection.style.display = 'none';
+    }
+});
+
+function toggleProfileDropdown() {
+    const dropdown = document.getElementById('profileDropdown');
+    dropdown.classList.toggle('show');
+}
+
+function handleSignOut() {
+    localStorage.removeItem('user');
+    window.location.reload(); // Refresh the page to update UI
+}
+
+// Close dropdown when clicking outside
+window.onclick = function(event) {
+    if (!event.target.closest('.profile-icon')) {
+        const dropdowns = document.getElementsByClassName('profile-dropdown');
+        for (let i = 0; i < dropdowns.length; i++) {
+            dropdowns[i].classList.remove('show');
+        }
+    }
+}
+        function simulateSignIn() {
+            document.getElementById('authButtons').style.display = 'none';
+            document.getElementById('profileSection').style.display = 'block';
+            
+            // Show login notification
+            const notification = document.getElementById('loginNotification');
+            notification.style.display = 'block';
+            
+            // Automatically hide notification after animation completes
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 4000);
+            
+            // Store login state in localStorage
+            localStorage.setItem('isLoggedIn', 'true');
+        }
+        
+        // Function to toggle profile dropdown
+        function toggleProfileDropdown() {
+            const dropdown = document.getElementById('profileDropdown');
+            dropdown.classList.toggle('active');
+        }
+        
+        // Function to handle sign out
+        function handleSignOut() {
+            document.getElementById('authButtons').style.display = 'flex';
+            document.getElementById('profileSection').style.display = 'none';
+            document.getElementById('profileDropdown').classList.remove('active');
+            
+            // Remove login state from localStorage
+            localStorage.removeItem('isLoggedIn');
+        }
+        
+        // Close dropdown when clicking outside
+        window.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('profileDropdown');
+            const profileIcon = document.querySelector('.profile-icon');
+            
+            if (!profileIcon.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+        
+        // Check login state on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Lucide icons
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+            
+            // Check if user is logged in (from localStorage)
+            const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+            if (isLoggedIn) {
+                document.getElementById('authButtons').style.display = 'none';
+                document.getElementById('profileSection').style.display = 'block';
+            }
+            
+            // Add event listeners to auth buttons for demo
+            // document.getElementById('signInBtn').addEventListener('click', function(e) {
+            //     e.preventDefault(); // Prevent navigation for demo
+            //     simulateSignIn();
+            // });
+            
+            document.getElementById('signUpBtn').addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent navigation for demo
+                simulateSignIn();
+            });
+        });
+    </script>
+
+    <section class="hero">
+      <div class="hero-particles"></div>
+      <div class="hero-content">
+        <div class="hero-text">
+          <div class="brand">
+            <svg class="logo-icon" viewBox="0 0 24 24" width="32" height="32">
+              <path
+                d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                fill="currentColor"
+              />
+            </svg>
+            <span class="brand-name">ElderConnect</span>
+          </div>
+          <h1 class="main-title">
+            Making Elderly Care
+            <div class="animated-text">
+              <span class="highlight current">Simple</span>
+              <span class="highlight">Safe</span>
+              <span class="highlight">Smart</span>
+            </div>
+          </h1>
+          <p class="hero-description">
+            Experience the next generation of elderly care with our AI-powered
+            platform. Providing peace of mind to seniors and their loved ones
+            through innovative technology and compassionate service.
+          </p>
+
+          <div class="cta-group">
+            <button class="cta-btn primary">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+              Get Started Free
+            </button>
+            <button class="cta-btn secondary">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <circle cx="12" cy="12" r="10" />
+                <polygon points="10 8 16 12 10 16 10 8" />
+              </svg>
+              Watch Demo
+            </button>
+          </div>
+
+          <div class="trust-badges">
+            <div class="trust-badge">
+              <div class="badge-icon">⭐</div>
+              <div class="badge-content">
+                <div class="badge-number">4.9/5</div>
+                <div class="badge-text">User Rating</div>
+              </div>
+            </div>
+            <div class="trust-badge">
+              <div class="badge-icon">🏆</div>
+              <div class="badge-content">
+                <div class="badge-number">10k+</div>
+                <div class="badge-text">Active Users</div>
+              </div>
+            </div>
+            <div class="trust-badge">
+              <div class="badge-icon">🔒</div>
+              <div class="badge-content">
+                <div class="badge-number">100%</div>
+                <div class="badge-text">HIPAA Compliant</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visuals">
+          <div class="main-image-container">
+            <img
+              src="images/depositphotos_287809706-stock-illustration-nursing-home-concept-group-of-removebg-preview.png"
+              alt="Elderly Care Dashboard"
+              class="main-image"
+            />
+            <div class="image-overlay"></div>
+          </div>
+          <div class="notification-cards">
+            <div class="notification-card">
+              <div class="notification-icon">❤️</div>
+              <div class="notification-content">
+                <p class="notification-title">Health Update</p>
+                <p class="notification-text">Heart rate normal: 72 BPM</p>
+              </div>
+            </div>
+            <div class="notification-card">
+              <div class="notification-icon">✨</div>
+              <div class="notification-content">
+                <p class="notification-title">Daily Activity</p>
+                <p class="notification-text">Morning walk completed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <h2 class="section-title">Our Features</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="16" cy="4" r="1" />
+            <path d="m18 19 1-7-6 1" />
+            <path d="m5 8 3-3 5.5 3-2.36 3.5" />
+            <path d="M4.24 14.5a5 5 0 0 0 6.88 6" />
+            <path d="M13.76 17.5a5 5 0 0 0-6.88-6" />
+          </svg>
+          <h3>Accessibility Support</h3>
+          <p>
+            Customized interface and assistive technologies to support
+            independence and ease of use
+          </p>
+          <a href="accessibility.html" class="feature-link">Learn More →</a>
+        </div>
+        <div class="feature-card">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16"
+            />
+            <path
+              d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20"
+            />
+            <path d="M16 17h4" />
+            <path d="M4 13h4" />
+          </svg>
+          <h3>Activities Tracking</h3>
+          <p>
+            Monitor daily activities, exercise routines, and maintain an active
+            lifestyle
+          </p>
+          <a href="activity.html" class="feature-link">Learn More →</a>
+        </div>
+        <div class="feature-card">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"
+            />
+            <polyline points="14 2 14 8 20 8" />
+            <line x1="16" y1="13" x2="8" y2="13" />
+            <line x1="16" y1="17" x2="8" y2="17" />
+            <line x1="10" y1="9" x2="8" y2="9" />
+          </svg>
+          <h3>Medical Records</h3>
+          <p>
+            Secure access to medical history, prescriptions, and healthcare
+            information
+          </p>
+          <a href="calender.html" class="feature-link">Learn More →</a>
+        </div>
+        <div class="feature-card">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <h3>Emergency Response</h3>
+          <p>
+            24/7 emergency assistance with instant alerts to caregivers and
+            medical services
+          </p>
+          <a href="emergency.html" class="feature-link">Learn More →</a>
+        </div>
+        <div class="feature-card">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-6.45 2.5 2.5 0 0 1 1.96-4.85c1.18-.53 2.55-.47 3.8.44zm5 0A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-6.45 2.5 2.5 0 0 0-1.96-4.85c-1.18-.53-2.55-.47-3.8.44z"
+            />
+          </svg>
+          <h3>Memory Support</h3>
+          <p>
+            Cognitive exercises and daily reminders to support mental well-being
+          </p>
+          <a href="memory.html" class="feature-link">Learn More →</a>
+        </div>
+        <div class="feature-card">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+          </svg>
+          <h3>Mental Health</h3>
+          <p>
+            Mood tracking, meditation guides, and access to mental health
+            resources
+          </p>
+          <a href="mentalHealth.html" class="feature-link">Learn More →</a>
+        </div>
+        <div class="feature-card">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+            <circle cx="9" cy="7" r="4" />
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+          </svg>
+          <h3>Social Connection</h3>
+          <p>
+            Stay connected with family and friends through video calls and
+            social activities
+          </p>
+          <a href="social.html" class="feature-link">Learn More →</a>
+        </div>
+      </div>
+    </section>
+
+    <button class="voice-assistant" onclick="startVoiceAssistant()">🎤</button>
+    <div id="screen-reader-text"></div>
+
+    <button class="sos-button">
+      SOS
+      <i data-lucide="alert-circle"></i>
+    </button>
+
+    <!-- About Section -->
+    <section class="about-section">
+      <div class="about-image">
+        <img
+          src="images/elderly-care-concept-illustration_114360-25701.avif"
+          alt="Elderly care illustration"
+        />
+      </div>
+      <div class="about-content">
+        <h2>About ElderEase</h2>
+        <p>
+          We are dedicated to revolutionizing elderly care through technology
+          and compassion. Our mission is to provide peace of mind to both
+          seniors and their families through innovative care solutions.
+        </p>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">10k+</div>
+            <div>Active Users</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">98%</div>
+            <div>Satisfaction Rate</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services">
+      <h2 class="section-title">Our Services</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <div
+            class="service-header"
+            style="background: linear-gradient(135deg, #ff69b4, #c71585)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+            </svg>
+            <img
+              src="images/images__3_-removebg-preview.png"
+              alt="Health Monitoring System"
+              class="service-image"
+            />
+          </div>
+          <div class="service-content">
+            <h3>Health Monitoring</h3>
+            <p>
+              Advanced 24/7 vital signs monitoring with AI-powered alerts and
+              predictive health insights
+            </p>
+            <ul class="service-features">
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                Real-time vital tracking
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                Predictive health analytics
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                Instant medical alerts
+              </li>
+            </ul>
+            <button class="service-btn">Get Started</button>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div
+            class="service-header"
+            style="background: linear-gradient(135deg, #ff69b4, #c71585)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+              <line x1="16" y1="2" x2="16" y2="6" />
+              <line x1="8" y1="2" x2="8" y2="6" />
+              <line x1="3" y1="10" x2="21" y2="10" />
+              <path d="M12 14h.01" />
+              <path d="M12 18h.01" />
+              <path d="M8 14h.01" />
+              <path d="M8 18h.01" />
+              <path d="M16 14h.01" />
+              <path d="M16 18h.01" />
+            </svg>
+            <img
+              src="images/istockphoto-469338496-612x612-removebg-preview.png"
+              alt="Care Management Platform"
+              class="service-image"
+            />
+          </div>
+          <div class="service-content">
+            <h3>Care Management</h3>
+            <p>
+              Comprehensive care planning with smart scheduling and medication
+              management system
+            </p>
+            <ul class="service-features">
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                Smart care planning
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                Medication reminders
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                Care coordination
+              </li>
+            </ul>
+            <button class="service-btn">Get Started</button>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div
+            class="service-header"
+            style="background: linear-gradient(135deg, #ff69b4, #c71585)"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              <path d="M12 8v4" />
+              <path d="M12 16h.01" />
+            </svg>
+            <img
+              src="images/ambulance-emergency-vehicle-cartoon-EMEE78-removebg-preview.png"
+              alt="Emergency Response System"
+              class="service-image"
+            />
+          </div>
+          <div class="service-content">
+            <h3>Emergency Response</h3>
+            <p>
+              Advanced emergency detection and response system with GPS tracking
+              and instant alerts
+            </p>
+            <ul class="service-features">
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                Fall detection
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                GPS tracking
+              </li>
+              <li>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+                Emergency contacts
+              </li>
+            </ul>
+            <button class="service-btn">Get Started</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+      <h2 class="section-title">What Our Users Say</h2>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <img
+              src="images/istockphoto-1060638228-612x612.jpg"
+              alt="Sarah Johnson"
+              class="testimonial-avatar"
+            />
+            <div class="testimonial-meta">
+              <h4>Sarah Johnson</h4>
+              <p class="testimonial-role">Family Caregiver</p>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            "CareCompanion has transformed how I care for my mother. The
+            emergency response feature gives me peace of mind knowing she's
+            always protected."
+          </p>
+          <div class="testimonial-rating">
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <img
+              src="images/istockphoto-1069798652-612x612.jpg"
+              alt="Robert Chen"
+              class="testimonial-avatar"
+            />
+            <div class="testimonial-meta">
+              <h4>Robert Chen</h4>
+              <p class="testimonial-role">Healthcare Professional</p>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            "The health monitoring system is incredibly accurate and reliable.
+            It helps us provide better care and respond quickly to any changes."
+          </p>
+          <div class="testimonial-rating">
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-header">
+            <img
+              src="images/istockphoto-1472635214-612x612.jpg"
+              alt="Emily Martinez"
+              class="testimonial-avatar"
+            />
+            <div class="testimonial-meta">
+              <h4>Emily Martinez</h4>
+              <p class="testimonial-role">Senior User</p>
+            </div>
+          </div>
+          <p class="testimonial-text">
+            "The medication reminders and health tracking features have made
+            managing my health so much easier. I feel more independent and
+            secure."
+          </p>
+          <div class="testimonial-rating">
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+            <i data-lucide="star"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+      <h2 style="text-align: center; margin-bottom: 2rem">Contact Us</h2>
+      <div class="contact-form">
+        <form onsubmit="handleSubmit(event)">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea rows="4" placeholder="Your Message" required></textarea>
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-grid">
+        <div>
+          <h3>ElderEase</h3>
+          <p>Making elderly care simple and safe</p>
+        </div>
+        <div>
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="#" style="color: white">Home</a></li>
+            <li><a href="#" style="color: white">Services</a></li>
+            <li><a href="#" style="color: white">About</a></li>
+            <li><a href="#" style="color: white">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <p>Email: info@carecompanion.com</p>
+          <p>Phone: +1 (555) 123-4567</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+  
+</html>

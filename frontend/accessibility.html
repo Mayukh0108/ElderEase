@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Elder Ease Accessibility</title>
+    <style>
+      /* Base Styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #fff3e6;
+        color: #333;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      body.dark-theme {
+        background-color: #333;
+        color: #fff3e6;
+      }
+
+      body.dark-theme header {
+        background: linear-gradient(135deg, #8b008b, #4b0082);
+      }
+
+      body.dark-theme button {
+        background: linear-gradient(135deg, #8b008b, #4b0082);
+      }
+
+      body.dark-theme select {
+        background-color: #9932cc;
+      }
+
+      body.dark-theme .notifications {
+        background: linear-gradient(135deg, #4b0082, #8b008b);
+        color: white;
+      }
+
+      body.dark-theme footer {
+        background: linear-gradient(135deg, #8b008b, #4b0082);
+      }
+
+      header {
+        background: linear-gradient(135deg, #ff69b4, #ff1493);
+        color: white;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        margin: 0;
+      }
+
+      .controls {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      button,
+      select {
+        padding: 10px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      /* Dark Theme */
+      body.dark-theme {
+        background-color: #333;
+        color: #fff3e6;
+      }
+
+      body.dark-theme header {
+        background: linear-gradient(135deg, #8b008b, #4b0082);
+      }
+
+      body.dark-theme button {
+        background: linear-gradient(135deg, #8b008b, #4b0082);
+      }
+
+      body.dark-theme select {
+        background-color: #9932cc;
+      }
+
+      body.dark-theme .notifications {
+        background: linear-gradient(135deg, #4b0082, #8b008b);
+        color: white;
+      }
+
+      body.dark-theme footer {
+        background: linear-gradient(135deg, #8b008b, #4b0082);
+      }
+
+      /* Night Vision Mode for Camera Only */
+      .camera-feed.night-vision {
+        filter: grayscale(100%) brightness(0.5) contrast(2);
+      }
+
+      button {
+        background: linear-gradient(135deg, #ff1493, #ff69b4);
+        color: white;
+      }
+
+      button:hover {
+        background: linear-gradient(135deg, #ff69b4, #ff1493);
+        transform: scale(1.05);
+      }
+
+      select {
+        background-color: #ffb6c1;
+      }
+
+      main {
+        padding: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .camera-section {
+        margin-bottom: 20px;
+      }
+
+      .camera-feed {
+        position: relative;
+        width: 100%;
+        height: 500px;
+        max-width: 100%;
+        margin: 0 auto;
+        background-color: #000;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      video,
+      canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      /* Night Vision Mode for Camera Only */
+      .camera-feed.night-vision {
+        filter: grayscale(100%) brightness(0.5) contrast(2);
+      }
+
+      /* Face Detection Box */
+      .face-box {
+        position: absolute;
+        width: 200px; /* Adjust width as needed */
+        height: 200px; /* Adjust height as needed */
+        border: 3px solid red;
+        background: transparent;
+        display: none;
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Optional: Add a glow effect */
+      }
+
+      .camera-controls {
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .snapshot-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .snapshot-gallery img {
+        width: 150px;
+        height: auto;
+        border: 2px solid #ff69b4;
+        border-radius: 5px;
+        transition: transform 0.3s;
+      }
+
+      .snapshot-gallery img:hover {
+        transform: scale(1.1);
+      }
+
+      .notifications {
+        background: linear-gradient(135deg, #ffe4e1, #ffb6c1);
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-height: 200px;
+        overflow-y: auto;
+      }
+
+      #notification-area {
+        margin-top: 10px;
+      }
+
+      .notification {
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 10px;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.5s ease-in-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      footer {
+        text-align: center;
+        padding: 10px;
+        background: linear-gradient(135deg, #ff69b4, #ff1493);
+        color: white;
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+
+      /* Night Vision Mode for Camera Only */
+      .night-vision .camera-feed {
+        filter: grayscale(100%) brightness(0.5) contrast(2);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Elder Ease Accessibility</h1>
+      <div class="controls">
+        <button id="theme-toggle">Toggle Theme</button>
+        <select id="font-size">
+          <option value="16px">Normal Font</option>
+          <option value="20px">Large Font</option>
+          <option value="24px">Extra Large Font</option>
+        </select>
+        <button id="night-vision-toggle">Night Vision</button>
+        <button id="start-recording">Start Recording</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="camera-section">
+        <h2>Live CCTV Feed</h2>
+        <div class="camera-feed">
+          <video id="live-camera" autoplay></video>
+          <canvas id="motion-canvas"></canvas>
+          <canvas id="snapshot-canvas"></canvas>
+          <div id="face-box" class="face-box"></div>
+        </div>
+        <div class="camera-controls">
+          <button id="capture-snapshot">Capture Snapshot</button>
+          <button id="detect-motion">Detect Motion</button>
+          <button id="detect-face">Detect Face</button>
+        </div>
+        <div class="snapshot-gallery" id="snapshot-gallery"></div>
+      </section>
+
+      <section class="notifications">
+        <h2>Notifications</h2>
+        <div id="notification-area"></div>
+      </section>
+    </main>
+
+    <script>
+      const themeToggle = document.getElementById("theme-toggle");
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-theme");
+      });
+
+      const fontSizeSelect = document.getElementById("font-size");
+      fontSizeSelect.addEventListener("change", (e) => {
+        document.body.style.fontSize = e.target.value;
+      });
+
+      const nightVisionToggle = document.getElementById("night-vision-toggle");
+      const cameraFeed = document.querySelector(".camera-feed");
+      nightVisionToggle.addEventListener("click", () => {
+        cameraFeed.classList.toggle("night-vision");
+      });
+
+      const video = document.getElementById("live-camera");
+      const motionCanvas = document.getElementById("motion-canvas");
+      const snapshotCanvas = document.getElementById("snapshot-canvas");
+      const faceBox = document.getElementById("face-box");
+      const ctx = motionCanvas.getContext("2d");
+      const snapshotCtx = snapshotCanvas.getContext("2d");
+
+      let isDetectingMotion = false;
+      let previousFrame = null;
+
+      navigator.mediaDevices
+        .getUserMedia({ video: true })
+        .then((stream) => {
+          video.srcObject = stream;
+        })
+        .catch((err) => {
+          console.error("Error accessing camera:", err);
+        });
+
+      const captureSnapshotButton = document.getElementById("capture-snapshot");
+      const snapshotGallery = document.getElementById("snapshot-gallery");
+
+      captureSnapshotButton.addEventListener("click", () => {
+        snapshotCanvas.width = video.videoWidth;
+        snapshotCanvas.height = video.videoHeight;
+        snapshotCtx.drawImage(
+          video,
+          0,
+          0,
+          snapshotCanvas.width,
+          snapshotCanvas.height
+        );
+
+        const snapshotImage = document.createElement("img");
+        snapshotImage.src = snapshotCanvas.toDataURL("image/png");
+        snapshotGallery.appendChild(snapshotImage);
+
+        sendNotification("Snapshot captured successfully.");
+      });
+
+      const detectFaceButton = document.getElementById("detect-face");
+      detectFaceButton.addEventListener("click", () => {
+        faceBox.style.display = "block";
+        faceBox.style.width = "200px"; // Adjust width as needed
+        faceBox.style.height = "200px"; // Adjust height as needed
+        faceBox.style.top = "50%";
+        faceBox.style.left = "50%";
+        faceBox.style.transform = "translate(-50%, -50%)";
+
+        sendNotification("Face detected.");
+      });
+
+      const detectMotionButton = document.getElementById("detect-motion");
+      detectMotionButton.addEventListener("click", () => {
+        isDetectingMotion = !isDetectingMotion;
+        if (isDetectingMotion) {
+          sendNotification("Motion detection started.");
+          detectMotion();
+        } else {
+          sendNotification("Motion detection stopped.");
+        }
+      });
+
+      function detectMotion() {
+        if (!isDetectingMotion) return;
+
+        motionCanvas.width = video.videoWidth;
+        motionCanvas.height = video.videoHeight;
+        ctx.drawImage(video, 0, 0, motionCanvas.width, motionCanvas.height);
+
+        if (previousFrame) {
+          const currentFrame = ctx.getImageData(
+            0,
+            0,
+            motionCanvas.width,
+            motionCanvas.height
+          );
+          const diff = compareFrames(previousFrame, currentFrame);
+
+          if (diff > 0.1) {
+            // Adjust threshold for sensitivity
+            sendNotification(
+              `Motion detected: ${diff > 0.2 ? "Running" : "Walking"}`
+            );
+          }
+        }
+
+        previousFrame = ctx.getImageData(
+          0,
+          0,
+          motionCanvas.width,
+          motionCanvas.height
+        );
+        requestAnimationFrame(detectMotion);
+      }
+
+      function compareFrames(frame1, frame2) {
+        let diff = 0;
+        for (let i = 0; i < frame1.data.length; i += 4) {
+          diff += Math.abs(frame1.data[i] - frame2.data[i]);
+        }
+        return diff / (frame1.width * frame1.height * 255);
+      }
+
+      const notificationArea = document.getElementById("notification-area");
+      function sendNotification(message) {
+        const notification = document.createElement("div");
+        notification.className = "notification";
+        notification.textContent = message;
+        notificationArea.appendChild(notification);
+        setTimeout(() => notification.remove(), 5000);
+      }
+
+      sendNotification("System is running smoothly.");
+      sendNotification("No strangers detected.");
+
+      const startRecordingButton = document.getElementById("start-recording");
+      startRecordingButton.addEventListener("click", () => {
+        sendNotification("Recording started. Feature under development.");
+      });
+    </script>
+  </body>
+</html>
