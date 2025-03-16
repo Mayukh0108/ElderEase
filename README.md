@@ -124,7 +124,7 @@ We welcome contributions! Please check our **[contribution guidelines](https://g
 👤 **Sebanti Dasgupta** (Backend Developer) - [dasguptasebanti2003@gmail.com](mailto:dasguptasebanti2003@gmail.com)  
 👤 **Arpan Chowdhury** (Frontend & ML Developer) - [arpanchowdhury003@gmail.com](mailto:arpanchowdhury003@gmail.com)  
 
-📌 **GitHub Repo:** [ElderEase](https://github.com/Mayukh0108/Elderly-care)  
+📌 **GitHub Repo:** [ElderEase](https://github.com/Mayukh0108/ElderEase/)  
 📌 **Project Details:** [Google Drive](https://drive.google.com/drive/folders/1sogM5gNOdINqnZg1hLt5w_WBRrzvTEk0)
 
 ## 🙌 Acknowledgements
