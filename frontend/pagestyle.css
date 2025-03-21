@@ -129,53 +129,61 @@
   
   /* Profile Section */
   .profile-section {
-    display: none;
+    display: none; /* Hidden by default, shown after login */
     position: relative;
-  }
-  
-  .profile-icon {
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 5px;
-    cursor: pointer;
-  }
-  
-  .profile-user-icon {
-    stroke: var(--primary-color) !important;
-  }
-  
-  .profile-dropdown {
+    justify-content: center;
+    color: #444;
+    transition: background-color 0.3s;
+}
+
+.profile-icon:hover {
+    background-color: #e0e0e0;
+}
+
+.profile-dropdown {
     position: absolute;
-    top: 40px;
+    top: 100%;
     right: 0;
-    background-color: var(--background-light);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    background-color: white;
     border-radius: 8px;
-    padding: 10px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     min-width: 180px;
     display: none;
-    z-index: 1001;
-  }
-  
-  .profile-dropdown.show {
+    z-index: 100;
+    overflow: hidden;
+}
+
+.profile-dropdown.active {
     display: block;
-  }
-  
-  .profile-dropdown a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 20px;
+}
+
+.profile-dropdown a {
+    display: block;
+    padding: 12px 16px;
+    color: #333;
     text-decoration: none;
-    color: var(--text-dark);
-    transition: all 0.3s ease;
-  }
-  
-  .profile-dropdown a:hover {
-    background-color: var(--background-off-white);
-    color: var(--primary-color);
-  }
-  
+    transition: background-color 0.2s;
+}
+
+.profile-dropdown a:hover {
+    background-color: #f5f5f5;
+}
+
+.profile-dropdown a i {
+    margin-right: 8px;
+    opacity: 0.7;
+}
+
   /* Login Notification */
   .login-notification {
     position: fixed;
@@ -916,3 +924,25 @@
       width: 100%;
     }
   }
+
+  .sos-button {
+    position: fixed;
+    bottom: 6rem;
+    right: 2rem;
+    background: #ff0033;
+    color: white;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(255, 0, 51, 0.4);
+    border: 3px solid white;
+    animation: pulse 2s infinite;
+    z-index: 1000;
+}
