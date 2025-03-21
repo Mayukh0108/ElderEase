@@ -6,9 +6,11 @@
     <title>Elder Care Profile</title>
     <style>
         :root {
-            --yellow: #FFD700;
-            --dark-pink: #FF1493;
-            --pink: #FFC0CB;
+            --primary-blue: #1a73e8;
+            --secondary-blue: #4285f4;
+            --light-blue: #e8f0fe;
+            --dark-blue: #0d47a1;
+            --accent-blue: #64b5f6;
             --light-gray: #f5f5f5;
             --dark-gray: #333;
             --white: #fff;
@@ -34,7 +36,7 @@
         /* Sidebar styles */
         .sidebar {
             width: 280px;
-            background: linear-gradient(135deg, var(--dark-pink), var(--pink));
+            background: linear-gradient(135deg, var(--dark-blue), var(--primary-blue));
             color: var(--white);
             padding: 20px;
             transition: all 0.3s ease;
@@ -51,7 +53,7 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            border: 4px solid var(--yellow);
+            border: 4px solid var(--accent-blue);
             object-fit: cover;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
@@ -64,7 +66,7 @@
             font-size: 1.4rem;
             margin-bottom: 5px;
             text-align: center;
-            color: var(--yellow);
+            color: var(--accent-blue);
         }
         
         .profile-item {
@@ -79,7 +81,7 @@
         .profile-item i {
             margin-right: 10px;
             font-size: 1.2rem;
-            color: var(--yellow);
+            color: var(--accent-blue);
         }
         
         .auth-section {
@@ -90,14 +92,14 @@
         }
         
         .auth-section h3 {
-            color: var(--yellow);
+            color: var(--accent-blue);
             margin-bottom: 15px;
             font-size: 1.1rem;
         }
         
         .auth-button {
             display: inline-block;
-            background-color: var(--yellow);
+            background-color: var(--accent-blue);
             color: var(--dark-gray);
             padding: 8px 15px;
             border-radius: 20px;
@@ -111,7 +113,7 @@
         }
         
         .auth-button:hover {
-            background-color: #e6c200;
+            background-color: #90caf9;
             transform: translateY(-2px);
         }
         
@@ -129,17 +131,17 @@
             align-items: center;
             margin-bottom: 30px;
             padding-bottom: 15px;
-            border-bottom: 2px solid var(--pink);
+            border-bottom: 2px solid var(--accent-blue);
         }
         
         .header h1 {
-            color: var(--dark-pink);
+            color: var(--dark-blue);
             font-size: 1.8rem;
         }
         
         .notification-icon {
             font-size: 1.5rem;
-            color: var(--dark-pink);
+            color: var(--primary-blue);
             cursor: pointer;
             position: relative;
         }
@@ -148,8 +150,8 @@
             position: absolute;
             top: -5px;
             right: -5px;
-            background-color: var(--yellow);
-            color: var(--dark-gray);
+            background-color: var(--accent-blue);
+            color: var(--white);
             border-radius: 50%;
             width: 18px;
             height: 18px;
@@ -176,7 +178,7 @@
         .section-icon {
             width: 40px;
             height: 40px;
-            background-color: var(--pink);
+            background-color: var(--light-blue);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -185,13 +187,13 @@
         }
         
         .section-icon i {
-            color: var(--dark-pink);
+            color: var(--primary-blue);
             font-size: 1.3rem;
         }
         
         .section-title {
             font-size: 1.3rem;
-            color: var(--dark-pink);
+            color: var(--primary-blue);
         }
         
         /* Medications section */
@@ -209,7 +211,8 @@
         }
         
         .medication-item:hover {
-            background-color: #f9f9f9;
+            background-color: var(--light-blue);
+            cursor: pointer;
         }
         
         .medication-info {
@@ -220,7 +223,7 @@
         .medication-icon {
             width: 40px;
             height: 40px;
-            background-color: var(--yellow);
+            background-color: var(--accent-blue);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -229,7 +232,7 @@
         }
         
         .medication-icon i {
-            color: var(--dark-gray);
+            color: var(--white);
         }
         
         .medication-details h4 {
@@ -243,8 +246,8 @@
         }
         
         .medication-time {
-            background-color: var(--pink);
-            color: var(--dark-pink);
+            background-color: var(--light-blue);
+            color: var(--primary-blue);
             padding: 5px 10px;
             border-radius: 20px;
             font-size: 0.8rem;
@@ -262,18 +265,18 @@
         .history-date {
             min-width: 80px;
             padding: 5px;
-            background-color: var(--yellow);
+            background-color: var(--accent-blue);
             border-radius: 5px;
             text-align: center;
             margin-right: 15px;
             font-weight: bold;
-            color: var(--dark-gray);
+            color: var(--white);
             font-size: 0.9rem;
         }
         
         .history-content h4 {
             margin-bottom: 5px;
-            color: var(--dark-pink);
+            color: var(--primary-blue);
         }
         
         .history-content p {
@@ -289,12 +292,13 @@
         }
         
         .activity-card {
-            background: linear-gradient(135deg, var(--pink), #ffe6ea);
+            background: linear-gradient(135deg, var(--light-blue), #e3f2fd);
             border-radius: 10px;
             padding: 15px;
             text-align: center;
             transition: all 0.3s;
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            cursor: pointer;
         }
         
         .activity-card:hover {
@@ -315,7 +319,7 @@
         
         .activity-icon i {
             font-size: 1.3rem;
-            color: var(--dark-pink);
+            color: var(--primary-blue);
         }
         
         .activity-name {
@@ -351,102 +355,257 @@
             background-color: #f8d7da;
             color: #dc3545;
         }
-        
-        /* Responsive styles */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-            }
-            
-            .sidebar {
-                width: 100%;
-                height: auto;
-                padding-bottom: 10px;
-            }
-            
-            .profile-info {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .profile-item {
-                width: 48%;
-            }
-            
-            .activities-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+
+        /* New features for elderly users */
+        .text-zoom-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-blue);
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .zoom-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: none;
+            color: var(--primary-blue);
+            transition: all 0.2s;
+        }
+
+        .zoom-button:hover {
+            background-color: var(--light-blue);
+        }
+
+        .help-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--accent-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .help-button:hover {
+            transform: scale(1.1);
+        }
+
+        .high-contrast-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 10px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 100;
+            border: none;
+        }
+
+        .voice-control {
+            display: inline-block;
+            background-color: var(--primary-blue);
+            color: var(--white);
+            padding: 10px;
+            border-radius: 50%;
+            margin-left: 15px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* Modal styles for help guide */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark-gray);
+        }
+
+        .help-item {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .help-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .help-item h3 {
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+        }
+
+        .help-item p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        /* High contrast mode */
+        .high-contrast {
+            --primary-blue: #000;
+            --secondary-blue: #333;
+            --light-blue: #eee;
+            --dark-blue: #000;
+            --accent-blue: #000;
+            --light-gray: #fff;
+            --dark-gray: #000;
+            --white: #fff;
+        }
+
+        .high-contrast .sidebar {
+            background: #000;
+        }
+
+        .high-contrast .medication-item:hover,
+        .high-contrast .activity-card:hover {
+            background-color: #eee;
+        }
+
+        .high-contrast .activity-card {
+            background: #eee;
+        }
+
+        .high-contrast .status-completed {
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #28a745;
+        }
+
+        .high-contrast .status-pending {
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #ffc107;
+        }
+
+        .high-contrast .status-missed {
+            background-color: #000;
+            color: #fff;
+            border: 2px solid #dc3545;
+        }
+
+        /* Larger text mode */
+        .large-text {
+            font-size: 120%;
+        }
+
+        .larger-text {
+            font-size: 150%;
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <!-- Sidebar with profile info -->
+        <!-- Sidebar section -->
         <div class="sidebar">
             <div class="profile-img-container">
-                <img src="./images/pfpEE.svg" alt="Profile Picture" class="profile-img">
+                <img src="images\pfpEE.svg" alt="Profile picture" class="profile-img">
             </div>
-            
             <div class="profile-info">
-                <h2>MANJU CHOWDHURY</h2>
-                
+                <h2>Martha Johnson</h2>
                 <div class="profile-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>arpanchowd003@gmail.com</span>
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>82 years old</span>
                 </div>
-                
                 <div class="profile-item">
-                    <i class="fas fa-id-card"></i>
-                    <span>Elder ID: ELDER-10042</span>
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>42 Maple Street, Apt 304</span>
                 </div>
-                
                 <div class="profile-item">
                     <i class="fas fa-phone"></i>
-                    <span>(+91) 458-456778</span>
+                    <span>(555) 123-4567</span>
                 </div>
-                
-                <div class="profile-item">
-                    <i class="fas fa-calendar"></i>
-                    <span>DOB: 05/12/1950</span>
-                </div>
-                
                 <div class="profile-item">
                     <i class="fas fa-user-md"></i>
-                    <span>Dr. SOUMYAJIT DUTTA</span>
+                    <span>Dr. Robert Miller</span>
+                </div>
+                <div class="profile-item">
+                    <i class="fas fa-heartbeat"></i>
+                    <span>Hypertension, Arthritis</span>
                 </div>
             </div>
-            
+
             <div class="auth-section">
-                <h3><i class="fas fa-lock"></i> Authentication</h3>
-                
+                <h3>Authorized Family</h3>
                 <div class="profile-item">
-                    <i class="fas fa-key"></i>
-                    <span>Password: ••••••••</span>
+                    <i class="fas fa-user"></i>
+                    <span>James Johnson (Son)</span>
                 </div>
-                
-                <a href="#" class="auth-button">
-                    <i class="fas fa-edit"></i> Change Password
-                </a>
-                
-                <a href="#" class="auth-button" style="margin-top: 10px;">
-                    <i class="fas fa-shield-alt"></i> Two-Factor Auth
-                </a>
+                <div class="profile-item">
+                    <i class="fas fa-user"></i>
+                    <span>Susan Parker (Daughter)</span>
+                </div>
+                <a href="#" class="auth-button">Manage Access</a>
             </div>
         </div>
-        
-        <!-- Main content area -->
+
+        <!-- Main content section -->
         <div class="main-content">
             <div class="header">
-                <h1>Personal Dashboard</h1>
+                <h1>Daily Care Dashboard <div class="voice-control"><i class="fas fa-microphone"></i></div></h1>
                 <div class="notification-icon">
                     <i class="fas fa-bell"></i>
-                    <span class="notification-badge">3</span>
+                    <div class="notification-badge">3</div>
                 </div>
             </div>
-            
-            <!-- Medications Section -->
+
+            <!-- Medications section -->
             <div class="section">
                 <div class="section-header">
                     <div class="section-icon">
@@ -454,7 +613,6 @@
                     </div>
                     <h2 class="section-title">Medications</h2>
                 </div>
-                
                 <ul class="medication-list">
                     <li class="medication-item">
                         <div class="medication-info">
@@ -466,93 +624,36 @@
                                 <p>10mg - For blood pressure</p>
                             </div>
                         </div>
-                        <span class="medication-time">8:00 AM</span>
+                        <div class="medication-time">8:00 AM</div>
                     </li>
-                    
                     <li class="medication-item">
                         <div class="medication-info">
                             <div class="medication-icon">
                                 <i class="fas fa-tablets"></i>
                             </div>
                             <div class="medication-details">
-                                <h4>Simvastatin</h4>
-                                <p>20mg - For cholesterol</p>
+                                <h4>Metformin</h4>
+                                <p>500mg - For diabetes</p>
                             </div>
                         </div>
-                        <span class="medication-time">7:00 PM</span>
+                        <div class="medication-time">12:00 PM</div>
                     </li>
-                    
                     <li class="medication-item">
                         <div class="medication-info">
                             <div class="medication-icon">
                                 <i class="fas fa-prescription-bottle"></i>
                             </div>
                             <div class="medication-details">
-                                <h4>Metformin</h4>
-                                <p>500mg - For diabetes</p>
+                                <h4>Atorvastatin</h4>
+                                <p>20mg - For cholesterol</p>
                             </div>
                         </div>
-                        <span class="medication-time">2:00 PM</span>
-                    </li>
-                    
-                    <li class="medication-item">
-                        <div class="medication-info">
-                            <div class="medication-icon">
-                                <i class="fas fa-pills"></i>
-                            </div>
-                            <div class="medication-details">
-                                <h4>Vitamin D</h4>
-                                <p>1000 IU - Supplement</p>
-                            </div>
-                        </div>
-                        <span class="medication-time">9:00 AM</span>
+                        <div class="medication-time">8:00 PM</div>
                     </li>
                 </ul>
             </div>
-            
-            <!-- Medical History Section -->
-            <div class="section">
-                <div class="section-header">
-                    <div class="section-icon">
-                        <i class="fas fa-history"></i>
-                    </div>
-                    <h2 class="section-title">Medical History</h2>
-                </div>
-                
-                <div class="history-item">
-                    <div class="history-date">Jan 15</div>
-                    <div class="history-content">
-                        <h4>Annual Physical Examination</h4>
-                        <p>Dr. Brown noted normal vitals. Blood pressure: 128/85. Weight: 145 lbs.</p>
-                    </div>
-                </div>
-                
-                <div class="history-item">
-                    <div class="history-date">Dec 3</div>
-                    <div class="history-content">
-                        <h4>Medication Adjustment</h4>
-                        <p>Lisinopril reduced from 20mg to 10mg daily.</p>
-                    </div>
-                </div>
-                
-                <div class="history-item">
-                    <div class="history-date">Nov 18</div>
-                    <div class="history-content">
-                        <h4>Flu Vaccination</h4>
-                        <p>Received seasonal influenza vaccine. No adverse reactions reported.</p>
-                    </div>
-                </div>
-                
-                <div class="history-item">
-                    <div class="history-date">Oct 5</div>
-                    <div class="history-content">
-                        <h4>Eye Examination</h4>
-                        <p>Minor cataract development noted. Follow-up in 6 months recommended.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Daily Activities Section -->
+
+            <!-- Daily Activities section -->
             <div class="section">
                 <div class="section-header">
                     <div class="section-icon">
@@ -560,115 +661,195 @@
                     </div>
                     <h2 class="section-title">Daily Activities</h2>
                 </div>
-                
                 <div class="activities-grid">
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="activity-name">Breakfast</div>
+                        <div class="activity-time">7:30 AM</div>
+                        <div class="activity-status status-completed">Completed</div>
+                    </div>
                     <div class="activity-card">
                         <div class="activity-icon">
                             <i class="fas fa-walking"></i>
                         </div>
                         <div class="activity-name">Morning Walk</div>
-                        <div class="activity-time">8:30 AM</div>
+                        <div class="activity-time">9:00 AM</div>
                         <div class="activity-status status-completed">Completed</div>
                     </div>
-                    
                     <div class="activity-card">
                         <div class="activity-icon">
                             <i class="fas fa-utensils"></i>
                         </div>
                         <div class="activity-name">Lunch</div>
                         <div class="activity-time">12:30 PM</div>
-                        <div class="activity-status status-completed">Completed</div>
+                        <div class="activity-status status-pending">Upcoming</div>
                     </div>
-                    
                     <div class="activity-card">
                         <div class="activity-icon">
-                            <i class="fas fa-brain"></i>
+                            <i class="fas fa-gamepad"></i>
                         </div>
-                        <div class="activity-name">Puzzle Time</div>
+                        <div class="activity-name">Cognitive Games</div>
                         <div class="activity-time">2:00 PM</div>
-                        <div class="activity-status status-pending">Pending</div>
+                        <div class="activity-status status-pending">Upcoming</div>
                     </div>
-                    
                     <div class="activity-card">
                         <div class="activity-icon">
-                            <i class="fas fa-heart"></i>
+                            <i class="fas fa-hands"></i>
                         </div>
-                        <div class="activity-name">BP Check</div>
-                        <div class="activity-time">4:00 PM</div>
-                        <div class="activity-status status-pending">Pending</div>
-                    </div>
-                    
-                    <div class="activity-card">
-                        <div class="activity-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="activity-name">Reading</div>
-                        <div class="activity-time">5:30 PM</div>
-                        <div class="activity-status status-pending">Pending</div>
-                    </div>
-                    
-                    <div class="activity-card">
-                        <div class="activity-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="activity-name">Social Call</div>
+                        <div class="activity-name">Physical Therapy</div>
                         <div class="activity-time">10:00 AM</div>
                         <div class="activity-status status-missed">Missed</div>
+                    </div>
+                    <div class="activity-card">
+                        <div class="activity-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="activity-name">Family Call</div>
+                        <div class="activity-time">4:00 PM</div>
+                        <div class="activity-status status-pending">Upcoming</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Health History section -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fas fa-file-medical-alt"></i>
+                    </div>
+                    <h2 class="section-title">Health History</h2>
+                </div>
+                <div class="history-list">
+                    <div class="history-item">
+                        <div class="history-date">Mar 15</div>
+                        <div class="history-content">
+                            <h4>Doctor's Appointment</h4>
+                            <p>Routine checkup with Dr. Miller - Blood pressure: 128/82, Weight: 145 lbs</p>
+                        </div>
+                    </div>
+                    <div class="history-item">
+                        <div class="history-date">Mar 10</div>
+                        <div class="history-content">
+                            <h4>Lab Work</h4>
+                            <p>Blood tests taken at Central Lab - Results pending</p>
+                        </div>
+                    </div>
+                    <div class="history-item">
+                        <div class="history-date">Feb 28</div>
+                        <div class="history-content">
+                            <h4>Physical Therapy</h4>
+                            <p>Session with therapist Jane - Noted improvement in mobility</p>
+                        </div>
+                    </div>
+                    <div class="history-item">
+                        <div class="history-date">Feb 20</div>
+                        <div class="history-content">
+                            <h4>Medication Change</h4>
+                            <p>Increased Lisinopril dosage from 5mg to 10mg</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Accessibility features -->
+    <button class="high-contrast-button" id="contrastToggle">High Contrast</button>
+    
+    <div class="text-zoom-controls">
+        <button class="zoom-button" id="zoomOut">A-</button>
+        <button class="zoom-button" id="zoomIn">A+</button>
+    </div>
+    
+    <button class="help-button" id="helpButton"><i class="fas fa-question"></i></button>
+
+    <!-- Help Modal -->
+    <div class="modal" id="helpModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2 style="color: var(--primary-blue); margin-bottom: 20px;">How to Use This Dashboard</h2>
+            
+            <div class="help-item">
+                <h3>Medications</h3>
+                <p>View your daily medications and scheduled times. Click on any medication to see detailed information.</p>
+            </div>
+            
+            <div class="help-item">
+                <h3>Daily Activities</h3>
+                <p>Track your daily schedule with color-coded status: Green (Completed), Yellow (Upcoming), Red (Missed).</p>
+            </div>
+            
+            <div class="help-item">
+                <h3>Health History</h3>
+                <p>Review your recent medical appointments, tests, and health changes.</p>
+            </div>
+            
+            <div class="help-item">
+                <h3>Accessibility Options</h3>
+                <p>- Use A+ and A- buttons to increase or decrease text size<br>
+                - Toggle High Contrast mode for better visibility<br>
+                - Click the microphone icon to use voice commands</p>
+            </div>
+            
+            <div class="help-item">
+                <h3>Need More Help?</h3>
+                <p>Call your care coordinator at (555) 987-6543 or press the emergency button if you need immediate assistance.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for functionality -->
     <script>
-        // JavaScript for interactive elements
-        document.addEventListener('DOMContentLoaded', function() {
-            // Notifications toggle
-            const notificationIcon = document.querySelector('.notification-icon');
-            notificationIcon.addEventListener('click', function() {
-                alert('You have 3 new notifications:\n- Medication reminder: Lisinopril at 8:00 AM\n- Doctor appointment tomorrow at 10:00 AM\n- Weekly health report available');
-            });
-            
-            // Make medication items interactive
-            const medicationItems = document.querySelectorAll('.medication-item');
-            medicationItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const medName = this.querySelector('h4').textContent;
-                    const medDetails = this.querySelector('p').textContent;
-                    alert(`${medName}\n${medDetails}\n\nLast taken: Today at ${this.querySelector('.medication-time').textContent}\nRefills remaining: 3`);
-                });
-            });
-            
-            // Activity status update
-            const activityCards = document.querySelectorAll('.activity-card');
-            activityCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    const status = this.querySelector('.activity-status');
-                    if (status.classList.contains('status-pending')) {
-                        status.classList.remove('status-pending');
-                        status.classList.add('status-completed');
-                        status.textContent = 'Completed';
-                        
-                        // Show confirmation
-                        const activityName = this.querySelector('.activity-name').textContent;
-                        alert(`${activityName} marked as completed!`);
-                    }
-                });
-            });
-            
-            // Authentication buttons
-            const authButtons = document.querySelectorAll('.auth-button');
-            authButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const action = this.textContent.trim();
-                    if (action.includes('Change Password')) {
-                        alert('Password change form will appear here.\nPlease enter your current password and new password.');
-                    } else if (action.includes('Two-Factor')) {
-                        alert('Two-factor authentication setup:\n1. Install an authenticator app\n2. Scan the QR code\n3. Enter the verification code');
-                    }
-                });
-            });
+        // Toggle high contrast mode
+        const contrastToggle = document.getElementById('contrastToggle');
+        contrastToggle.addEventListener('click', () => {
+            document.body.classList.toggle('high-contrast');
+            contrastToggle.textContent = document.body.classList.contains('high-contrast') ? 'Normal Mode' : 'High Contrast';
+        });
+        
+        // Text zoom functionality
+        const zoomIn = document.getElementById('zoomIn');
+        const zoomOut = document.getElementById('zoomOut');
+        
+        zoomIn.addEventListener('click', () => {
+            if (document.body.classList.contains('larger-text')) {
+                return;
+            } else if (document.body.classList.contains('large-text')) {
+                document.body.classList.remove('large-text');
+                document.body.classList.add('larger-text');
+            } else {
+                document.body.classList.add('large-text');
+            }
+        });
+        
+        zoomOut.addEventListener('click', () => {
+            if (document.body.classList.contains('larger-text')) {
+                document.body.classList.remove('larger-text');
+                document.body.classList.add('large-text');
+            } else if (document.body.classList.contains('large-text')) {
+                document.body.classList.remove('large-text');
+            }
+        });
+        
+        // Help modal functionality
+        const helpButton = document.getElementById('helpButton');
+        const helpModal = document.getElementById('helpModal');
+        const closeModal = document.getElementById('closeModal');
+        
+        helpButton.addEventListener('click', () => {
+            helpModal.style.display = 'flex';
+        });
+        
+        closeModal.addEventListener('click', () => {
+            helpModal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', (event) => {
+            if (event.target == helpModal) {
+                helpModal.style.display = 'none';
+            }
         });
     </script>
 </body>
