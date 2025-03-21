@@ -5,50 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memory Journal</title>
     <style>
+        /* Reset and base styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Georgia', serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
+        :root {
+            /* Color palette - warm and soothing colors for elderly users */
+            --primary-color: #2980b9;
+            --primary-light: #3498db;
+            --primary-lighter: #a6d0f5;
+            --primary-dark: #1a5889;
+            --secondary-color: #f8f9fa;
+            --text-dark: #2c3e50;
+            --text-light: #f8f9fa;
+            --text-muted: #6c757d;
+            --background-light: #ffffff;
+            --background-off-white: #f1f7fc;
+            --background-warm: #f7f3eb;
+            --border-color: #e0e0e0;
+            --success-color: #27ae60;
+            --warning-color: #e74c3c;
+            --memory-card-bg: #fff;
+            --form-bg: #f1f7fc;
+        }
+        
         body {
-            background-color: #f7e6d5;
-            padding: 2rem;
+            background-color: var(--background-warm);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding: 0;
         }
 
+        /* Accessibility Bar */
+        .accessibility-bar {
+            background-color: var(--background-off-white);
+            display: flex;
+            justify-content: flex-end;
+            padding: 5px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .accessibility-btn {
+            background-color: var(--background-light);
+            border: 1px solid var(--border-color);
+            padding: 5px 10px;
+            margin-left: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .accessibility-btn:hover {
+            background-color: var(--primary-light);
+            color: var(--text-light);
+        }
+
+        /* Main Container */
         .container {
             max-width: 1200px;
-            margin: 0 auto;
-            background: #fff;
+            margin: 2rem auto;
+            background: var(--background-light);
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
         }
 
+        /* Header */
         .header {
             text-align: center;
-            margin-bottom: 2rem;
-            border-bottom: 2px solid #d4a373;
-            padding-bottom: 1rem;
+            margin-bottom: 2.5rem;
+            border-bottom: 2px solid var(--primary-lighter);
+            padding-bottom: 1.5rem;
         }
 
         .header h1 {
-            color: #774936;
+            color: var(--primary-dark);
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
         }
 
         .header p {
-            color: #996b4d;
+            color: var(--text-muted);
             font-style: italic;
+            font-size: 1.1rem;
         }
 
+        /* Memory Form */
         .memory-form {
-            background: #fefae0;
+            background: var(--form-bg);
             padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
+            border-radius: 12px;
+            margin-bottom: 3rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-title {
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.8rem;
         }
 
         .form-group {
@@ -57,17 +118,25 @@
 
         label {
             display: block;
-            margin-bottom: 0.5rem;
-            color: #774936;
-            font-weight: bold;
+            margin-bottom: 0.6rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.1rem;
         }
 
         input, textarea {
             width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #d4a373;
-            border-radius: 4px;
-            font-size: 1rem;
+            padding: 0.9rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
         }
 
         textarea {
@@ -76,67 +145,89 @@
         }
 
         .btn {
-            background: #d4a373;
+            background: var(--primary-color);
             color: white;
-            padding: 0.8rem 1.5rem;
+            padding: 0.9rem 1.8rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
             transition: background 0.3s;
+            display: block;
+            width: 100%;
+            max-width: 250px;
+            margin: 0 auto;
         }
 
         .btn:hover {
-            background: #b08968;
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Memories Grid */
+        .memories-section {
+            padding: 1rem;
+        }
+
+        .memories-title {
+            color: var(--primary-dark);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            text-align: center;
         }
 
         .memories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 2rem;
-            padding: 1rem;
         }
 
         .memory-card {
-            background: white;
-            border: 1px solid #d4a373;
-            border-radius: 8px;
-            padding: 1rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            background: var(--memory-card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .memory-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .memory-date {
-            color: #996b4d;
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 0.6rem;
+            font-weight: 500;
         }
 
         .memory-title {
-            color: #774936;
-            font-size: 1.2rem;
+            color: var(--primary-dark);
+            font-size: 1.3rem;
             margin-bottom: 1rem;
+            font-weight: 600;
         }
 
         .memory-content {
-            color: #4a4a4a;
-            line-height: 1.6;
+            color: var(--text-dark);
+            line-height: 1.7;
+            font-size: 1rem;
         }
 
         .media-preview {
             width: 100%;
             height: 200px;
-            background: #fefae0;
-            border-radius: 4px;
+            background: var(--background-off-white);
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1rem;
             overflow: hidden;
+            border: 1px solid var(--border-color);
         }
 
         .media-preview img, 
@@ -152,34 +243,103 @@
 
         .upload-btn {
             display: inline-block;
-            padding: 0.5rem 1rem;
-            background: #996b4d;
+            padding: 0.7rem 1.3rem;
+            background: var(--primary-light);
             color: white;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
             margin-bottom: 1rem;
+            font-weight: 600;
+            transition: background 0.3s;
+            text-align: center;
         }
 
         .upload-btn:hover {
-            background: #774936;
+            background: var(--primary-dark);
         }
 
+        /* Help Button */
+        .help-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            border: none;
+            z-index: 999;
+            transition: all 0.3s ease;
+        }
+
+        .help-button:hover {
+            background-color: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .no-memories {
+            text-align: center;
+            padding: 2rem;
+            background: var(--background-off-white);
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            grid-column: 1 / -1;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 3rem;
+            text-align: center;
+            padding: 1.5rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
+        }
+
+        /* Responsive Styles */
         @media (max-width: 768px) {
             body {
                 padding: 1rem;
             }
 
             .container {
-                padding: 1rem;
+                padding: 1.5rem;
+                margin: 1rem;
             }
 
             .memories-grid {
                 grid-template-columns: 1fr;
             }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .form-group {
+                margin-bottom: 1rem;
+            }
+
+            .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="accessibility-bar">
+        <button class="accessibility-btn" id="increaseText">A+</button>
+        <button class="accessibility-btn" id="decreaseText">A-</button>
+        <button class="accessibility-btn" id="highContrast">High Contrast</button>
+    </div>
+
     <div class="container">
         <header class="header">
             <h1>My Precious Memories</h1>
@@ -187,6 +347,7 @@
         </header>
 
         <section class="memory-form">
+            <h2 class="form-title">Add a New Memory</h2>
             <form id="memoryForm">
                 <div class="form-group">
                     <label for="memoryTitle">Memory Title</label>
@@ -194,7 +355,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="memoryDate">Date</label>
+                    <label for="memoryDate">Date of Memory</label>
                     <input type="date" id="memoryDate" required>
                 </div>
 
@@ -213,10 +374,19 @@
             </form>
         </section>
 
-        <section class="memories-grid" id="memoriesGrid">
-            <!-- Memories will be added here dynamically -->
+        <section class="memories-section">
+            <h2 class="memories-title">Your Memories Collection</h2>
+            <div class="memories-grid" id="memoriesGrid">
+                <!-- Memories will be added here dynamically -->
+            </div>
         </section>
+
+        <footer>
+            <p>© 2025 Memory Journal - Preserving your precious moments</p>
+        </footer>
     </div>
+
+    <button class="help-button" id="helpButton">?</button>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -224,6 +394,50 @@
             const memoriesGrid = document.getElementById('memoriesGrid');
             const mediaUpload = document.getElementById('mediaUpload');
             const mediaPreview = document.getElementById('mediaPreview');
+            const increaseTextBtn = document.getElementById('increaseText');
+            const decreaseTextBtn = document.getElementById('decreaseText');
+            const highContrastBtn = document.getElementById('highContrast');
+            const helpButton = document.getElementById('helpButton');
+
+            // Font Size Adjustment
+            let currentFontSize = 16;
+            
+            increaseTextBtn.addEventListener('click', function() {
+                currentFontSize += 2;
+                document.body.style.fontSize = currentFontSize + 'px';
+            });
+            
+            decreaseTextBtn.addEventListener('click', function() {
+                if (currentFontSize > 14) {
+                    currentFontSize -= 2;
+                    document.body.style.fontSize = currentFontSize + 'px';
+                }
+            });
+            
+            // High Contrast Toggle
+            highContrastBtn.addEventListener('click', function() {
+                document.body.classList.toggle('high-contrast');
+                if (document.body.classList.contains('high-contrast')) {
+                    document.documentElement.style.setProperty('--background-warm', '#000000');
+                    document.documentElement.style.setProperty('--background-light', '#000000');
+                    document.documentElement.style.setProperty('--text-dark', '#ffffff');
+                    document.documentElement.style.setProperty('--border-color', '#ffffff');
+                    document.documentElement.style.setProperty('--form-bg', '#333333');
+                    document.documentElement.style.setProperty('--memory-card-bg', '#333333');
+                } else {
+                    document.documentElement.style.setProperty('--background-warm', '#f7f3eb');
+                    document.documentElement.style.setProperty('--background-light', '#ffffff');
+                    document.documentElement.style.setProperty('--text-dark', '#2c3e50');
+                    document.documentElement.style.setProperty('--border-color', '#e0e0e0');
+                    document.documentElement.style.setProperty('--form-bg', '#f1f7fc');
+                    document.documentElement.style.setProperty('--memory-card-bg', '#fff');
+                }
+            });
+            
+            // Help Button
+            helpButton.addEventListener('click', function() {
+                alert("Memory Journal Help:\n\n1. To add a new memory, fill out the form at the top\n2. Add a title and date for your memory\n3. Write your memory details in the description box\n4. Optionally add a photo by clicking 'Add Photo or Video'\n5. Click 'Save Memory' when done\n6. Your saved memories will appear below\n7. Use A+ and A- buttons to change text size\n8. Use High Contrast for better visibility");
+            });
 
             // Load existing memories from localStorage
             let memories = JSON.parse(localStorage.getItem('memories')) || [];
@@ -294,9 +508,17 @@
                 // Reset form
                 memoryForm.reset();
                 mediaPreview.innerHTML = '';
+                
+                // Show confirmation
+                alert("Memory saved successfully!");
             }
 
             function renderMemories() {
+                if (memories.length === 0) {
+                    memoriesGrid.innerHTML = '<div class="no-memories">No memories yet. Add your first memory above!</div>';
+                    return;
+                }
+                
                 memoriesGrid.innerHTML = memories.map(function(memory) {
                     const mediaElement = memory.media ? 
                         (memory.mediaType === 'image' ?
