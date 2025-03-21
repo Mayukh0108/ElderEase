@@ -107,8 +107,27 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 // ✅ Fixed sendSOS function (ensuring backend response is JSON)
+// function sendSOS() {
+//     fetch("http://localhost:5000/send-sos", {  // Ensure backend is running at this URL
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify({ 
+//             to: "+918017466069", 
+//             message: "🚨 SOS ALERT!!! Immediate assistance needed." 
+//         })
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error(`Server error: ${response.status}`);
+//         }
+//         return response.json();
+//     })
+//     .then(data => console.log("Response from server:", data))
+//     .catch(error => console.error("Error sending SOS:", error));
+// }
+
 function sendSOS() {
-    fetch("http://localhost:5000/send-sos", {  // Ensure backend is running at this URL
+    fetch("https://elderease-1.onrender.com/send-sos", {  // Ensure backend is running at this URL
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
@@ -125,6 +144,7 @@ function sendSOS() {
     .then(data => console.log("Response from server:", data))
     .catch(error => console.error("Error sending SOS:", error));
 }
+
 
 // ✅ Google OAuth authentication
 function authenticateWithGoogle() {
