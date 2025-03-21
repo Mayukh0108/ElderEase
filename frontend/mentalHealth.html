@@ -5,335 +5,640 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mental Wellness Journey</title>
     <style>
-        :root {
-            --primary-pink: #FF69B4;
-            --dark-pink: #FF1493;
-            --soft-yellow: #FFE4B5;
-            --accent-yellow: #FFD700;
-            --gradient: linear-gradient(135deg, var(--primary-pink), var(--dark-pink));
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
+        :root {
+            /* Color palette - white and blue theme from provided CSS */
+            --primary-color: #2980b9;
+            --primary-light: #3498db;
+            --primary-lighter: #a6d0f5;
+            --primary-dark: #1a5889;
+            --secondary-color: #f8f9fa;
+            --text-dark: #2c3e50;
+            --text-light: #f8f9fa;
+            --text-muted: #6c757d;
+            --background-light: #ffffff;
+            --background-off-white: #f1f7fc;
+            --border-color: #e0e0e0;
+            --success-color: #27ae60;
+            --warning-color: #e74c3c;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #FFE4B5, #FFB6C1);
+            background-color: var(--background-light);
             min-height: 100vh;
+            color: var(--text-dark);
+            line-height: 1.6;
         }
 
-        .game-header {
-            text-align: center;
-            padding: 20px;
-            position: relative;
+        /* Accessibility Bar */
+        .accessibility-bar {
+            background-color: var(--background-off-white);
+            display: flex;
+            justify-content: flex-end;
+            padding: 5px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .accessibility-btn {
+            background-color: var(--background-light);
+            border: 1px solid var(--border-color);
+            padding: 5px 10px;
+            margin-left: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .accessibility-btn:hover {
+            background-color: var(--primary-light);
+            color: var(--text-light);
         }
 
-        .level-badge {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            background: var(--gradient);
-            border-radius: 50%;
-            width: 80px;
-            height: 80px;
+        /* Navbar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: var(--background-light);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
-            animation: pulse 2s infinite;
+            text-decoration: none;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color);
         }
 
-        .streak-counter {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(45deg, #FFD700, #FFA500);
-            padding: 10px 20px;
-            border-radius: 25px;
-            color: white;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 15px rgba(255, 165, 0, 0.3);
+        /* Game Statistics Section */
+        .game-stats {
+            background-color: var(--background-off-white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin: 30px auto;
+            max-width: 1200px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: space-between;
         }
-
-        .progress-bar {
-            width: 80%;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.3);
+        
+        .stat-card {
+            background-color: var(--background-light);
             border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            padding: 15px 20px;
+            min-width: 150px;
+            flex: 1;
+            text-align: center;
+        }
+        
+        .stat-title {
+            font-size: 18px;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Game Header */
+        .game-header {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: var(--background-light);
+            margin-bottom: 30px;
+        }
+        
+        .game-header h1 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .progress-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 24px;
+            background: var(--background-off-white);
+            border-radius: 12px;
             margin: 20px auto;
             overflow: hidden;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
         }
-
+        
         .progress-fill {
             width: 60%;
             height: 100%;
-            background: var(--gradient);
-            border-radius: 10px;
+            background: linear-gradient(90deg, var(--primary-light), var(--primary-color));
+            border-radius: 12px;
             transition: width 0.5s ease;
-            animation: progressPulse 2s infinite;
         }
 
-        .activity-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            padding: 20px;
+        /* Achievements Section */
+        .achievements-container {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 0 auto 30px;
+            padding: 0 20px;
         }
-
-        .activity-card {
-            background: white;
-            border-radius: 20px;
-            padding: 20px;
+        
+        .section-title {
+            font-size: 24px;
+            color: var(--text-dark);
+            margin-bottom: 20px;
             text-align: center;
-            transition: transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.2);
         }
-
-        .activity-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transition: 0.5s;
-        }
-
-        .activity-card:hover::before {
-            left: 100%;
-        }
-
-        .activity-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .activity-card h3 {
-            color: var(--dark-pink);
-            font-size: 1.8rem;
-            margin: 10px 0;
-        }
-
-        .reward-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 30px;
-            height: 30px;
-            background: var(--accent-yellow);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-            animation: spin 10s linear infinite;
-        }
-
+        
         .achievements-showcase {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
             flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .achievement {
+            background: var(--background-off-white);
+            width: 90px;
+            height: 90px;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 32px;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+        }
+        
+        .achievement.unlocked {
+            opacity: 1;
+            color: var(--primary-color);
+            background-color: var(--background-light);
+            border-color: var(--primary-lighter);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .achievement-title {
+            font-size: 14px;
+            margin-top: 8px;
+            text-align: center;
         }
 
-        .achievement {
-            background: var(--gradient);
-            width: 60px;
-            height: 60px;
+        /* Daily Quest Section */
+        .daily-quest {
+            background: linear-gradient(45deg, var(--primary-light), var(--primary-color));
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px auto;
+            max-width: 800px;
+            color: white;
+            box-shadow: 0 8px 20px rgba(41, 128, 185, 0.3);
+        }
+        
+        .daily-quest h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        
+        .quest-reward {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 8px 15px;
+            border-radius: 20px;
+            margin-left: 10px;
+            font-weight: 500;
+        }
+        
+        .quest-progress-bar {
+            height: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        
+        .quest-progress-fill {
+            width: 33%;
+            height: 100%;
+            background: white;
+            border-radius: 8px;
+        }
+
+        /* Activity Grid */
+        .activities-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .activity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .activity-card {
+            background: var(--background-light);
+            border-radius: 16px;
+            padding: 25px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .activity-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(41, 128, 185, 0.2);
+        }
+        
+        .activity-card h3 {
+            color: var(--primary-color);
+            font-size: 24px;
+            margin: 15px 0;
+        }
+        
+        .activity-card p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .reward-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: var(--success-color);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.5rem;
-            opacity: 0.5;
-            transition: all 0.3s ease;
+            font-size: 20px;
+            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
         }
-
-        .achievement.unlocked {
-            opacity: 1;
-            animation: unlock 0.5s ease;
-        }
-
-        .daily-quest {
-            background: linear-gradient(45deg, #FF69B4, #FFB6C1);
-            padding: 15px;
-            border-radius: 15px;
-            margin: 10px;
-            color: white;
-            text-align: left;
-        }
-
-        .quest-reward {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 5px 10px;
-            border-radius: 15px;
-            margin-left: 10px;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes progressPulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.8; }
-            100% { opacity: 1; }
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes unlock {
-            0% { transform: scale(0.5); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        .quick-stats {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-        }
-
-        .stat-box {
-            background: white;
-            padding: 15px 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(255, 20, 147, 0.1);
-            color: var(--dark-pink);
-        }
-
+        
         .activity-button {
-            background: var(--gradient);
+            background: var(--primary-color);
             color: white;
             border: none;
             padding: 15px 30px;
-            border-radius: 25px;
-            font-size: 1.1rem;
+            border-radius: 10px;
+            font-size: 18px;
             cursor: pointer;
             transition: all 0.3s ease;
             margin-top: 15px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(41, 128, 185, 0.2);
         }
-
+        
         .activity-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+            background: var(--primary-dark);
+            box-shadow: 0 6px 15px rgba(41, 128, 185, 0.3);
         }
 
+        /* SOS Button */
+        .sos-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--warning-color);
+            color: var(--text-light);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+            border: 3px solid white;
+            animation: pulse 2s infinite;
+            z-index: 1000;
+        }
+        
+        .sos-text {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        /* Level Up Notification */
         .level-up-notification {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: var(--gradient);
-            padding: 30px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-dark));
+            padding: 40px;
             border-radius: 20px;
             color: white;
             text-align: center;
             animation: popIn 0.5s ease;
             display: none;
+            box-shadow: 0 15px 40px rgba(41, 128, 185, 0.4);
+            z-index: 1001;
+            max-width: 90%;
         }
-
+        
+        .level-up-notification h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        
+        .level-up-notification p {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        
+        /* Helper/Navigation Button */
+        .helper-button {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(41, 128, 185, 0.4);
+            z-index: 1000;
+        }
+        
+        .helper-text {
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        
+        /* Animations */
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 8px 25px rgba(231, 76, 60, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4); }
+        }
+        
         @keyframes popIn {
             0% { transform: translate(-50%, -50%) scale(0); }
-            50% { transform: translate(-50%, -50%) scale(1.2); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
             100% { transform: translate(-50%, -50%) scale(1); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .game-stats {
+                flex-direction: column;
+            }
+            
+            .helper-button, .sos-button {
+                width: 70px;
+                height: 70px;
+                font-size: 20px;
+            }
+            
+            .activity-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .level-badge, .streak-counter {
+                position: static;
+                margin: 10px auto;
+            }
+            
+            .navbar .nav-content {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="level-badge">
-        Lvl 5
+    <!-- Accessibility Bar -->
+    <div class="accessibility-bar">
+        <button class="accessibility-btn">A+ Larger Text</button>
+        <button class="accessibility-btn">A- Smaller Text</button>
+        <button class="accessibility-btn">High Contrast</button>
+    </div>
+    
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">
+                <span>Mental Wellness Journey</span>
+            </a>
+            <div class="nav-links">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Activities</a>
+                <a href="#" class="nav-link">Progress</a>
+                <a href="#" class="nav-link">Resources</a>
+                <a href="#" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Game Stats Section -->
+    <div class="game-stats">
+        <div class="stat-card">
+            <div class="stat-title">Level</div>
+            <div class="stat-value">5</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">Streak</div>
+            <div class="stat-value">7 days</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">Points</div>
+            <div class="stat-value">1,250</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">Activities</div>
+            <div class="stat-value">25</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-title">Rank</div>
+            <div class="stat-value">Gold</div>
+        </div>
     </div>
 
-    <div class="streak-counter">
-        🔥 7 Day Streak!
-    </div>
-
+    <!-- Game Header -->
     <div class="game-header">
-        <h1>Mental Wellness Journey</h1>
-        <div class="progress-bar">
-            <div class="progress-fill"></div>
-        </div>
-        <div class="quick-stats">
-            <div class="stat-box">🌟 Points: 1,250</div>
-            <div class="stat-box">🎯 Activities: 25</div>
-            <div class="stat-box">🏆 Rank: Gold</div>
+        <h1>Your Wellness Journey</h1>
+        <div class="progress-container">
+            <div class="progress-label">
+                <span>Level 5</span>
+                <span>Level 6</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
         </div>
     </div>
 
-    <div class="achievements-showcase">
-        <div class="achievement unlocked" title="First Activity">🎯</div>
-        <div class="achievement unlocked" title="5 Day Streak">🔥</div>
-        <div class="achievement" title="Meditation Master">🧘</div>
-        <div class="achievement" title="Social Butterfly">🦋</div>
-        <div class="achievement" title="Mindfulness Expert">🌟</div>
+    <!-- Achievements Section -->
+    <div class="achievements-container">
+        <h2 class="section-title">Your Achievements</h2>
+        <div class="achievements-showcase">
+            <div class="achievement unlocked">
+                <div>🎯</div>
+                <div class="achievement-title">First Activity</div>
+            </div>
+            <div class="achievement unlocked">
+                <div>🔥</div>
+                <div class="achievement-title">5 Day Streak</div>
+            </div>
+            <div class="achievement">
+                <div>🧘</div>
+                <div class="achievement-title">Meditation Master</div>
+            </div>
+            <div class="achievement">
+                <div>🦋</div>
+                <div class="achievement-title">Social Butterfly</div>
+            </div>
+            <div class="achievement">
+                <div>🌟</div>
+                <div class="achievement-title">Mindfulness Expert</div>
+            </div>
+        </div>
     </div>
 
+    <!-- Daily Quest Section -->
     <div class="daily-quest">
-        <h3>Daily Quest</h3>
+        <h3>Today's Quest</h3>
         <p>Complete 3 activities today <span class="quest-reward">+50 points</span></p>
-        <div class="progress-bar">
-            <div class="progress-fill" style="width: 33%"></div>
+        <div class="quest-progress-bar">
+            <div class="quest-progress-fill"></div>
         </div>
     </div>
 
-    <div class="activity-grid">
-        <div class="activity-card">
-            <div class="reward-badge">⭐</div>
-            <h3>Meditation</h3>
-            <p>Take a moment to breathe and center yourself</p>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 75%"></div>
+    <!-- Activity Grid -->
+    <div class="activities-container">
+        <h2 class="section-title">Wellness Activities</h2>
+        <div class="activity-grid">
+            <div class="activity-card">
+                <div class="reward-badge">⭐</div>
+                <h3>Meditation</h3>
+                <p>Take a moment to breathe and center yourself</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%"></div>
+                </div>
+                <button class="activity-button">Start Activity</button>
             </div>
-            <button class="activity-button">Start Activity</button>
-        </div>
 
-        <div class="activity-card">
-            <div class="reward-badge">🌟</div>
-            <h3>Gratitude Journal</h3>
-            <p>Write down three things you're grateful for</p>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 40%"></div>
+            <div class="activity-card">
+                <div class="reward-badge">🌟</div>
+                <h3>Gratitude Journal</h3>
+                <p>Write down three things you're grateful for</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 40%"></div>
+                </div>
+                <button class="activity-button">Start Activity</button>
             </div>
-            <button class="activity-button">Start Activity</button>
-        </div>
 
-        <div class="activity-card">
-            <div class="reward-badge">💫</div>
-            <h3>Mood Tracker</h3>
-            <p>Track your daily emotions and patterns</p>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 60%"></div>
+            <div class="activity-card">
+                <div class="reward-badge">💫</div>
+                <h3>Mood Tracker</h3>
+                <p>Track your daily emotions and patterns</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 60%"></div>
+                </div>
+                <button class="activity-button">Start Activity</button>
             </div>
-            <button class="activity-button">Start Activity</button>
-        </div>
 
-        <div class="activity-card">
-            <div class="reward-badge">🏆</div>
-            <h3>Mindful Walking</h3>
-            <p>Take a peaceful walk in nature</p>
-            <div class="progress-bar">
-                <div class="progress-fill" style="width: 25%"></div>
+            <div class="activity-card">
+                <div class="reward-badge">🏆</div>
+                <h3>Mindful Walking</h3>
+                <p>Take a peaceful walk in nature</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%"></div>
+                </div>
+                <button class="activity-button">Start Activity</button>
             </div>
-            <button class="activity-button">Start Activity</button>
         </div>
     </div>
 
+    <!-- SOS Button -->
+    <button class="sos-button">
+        SOS
+        <span class="sos-text">Help</span>
+    </button>
+
+    <!-- Helper Button -->
+    <button class="helper-button">
+        <span>?</span>
+        <span class="helper-text">Guide</span>
+    </button>
+
+    <!-- Level Up Notification -->
     <div class="level-up-notification" id="levelUp">
         <h2>🎉 Level Up! 🎉</h2>
         <p>You've reached Level 5!</p>
@@ -356,7 +661,7 @@
 
         function updateStats() {
             // Update points display
-            document.querySelector('.stat-box').textContent = `🌟 Points: ${points}`;
+            document.querySelector('.stat-card:nth-child(3) .stat-value').textContent = points;
             
             // Check for level up
             if (points >= level * 1000) {
@@ -366,7 +671,7 @@
 
         function levelUp() {
             level++;
-            document.querySelector('.level-badge').textContent = `Lvl ${level}`;
+            document.querySelector('.stat-card:first-child .stat-value').textContent = level;
             
             const notification = document.getElementById('levelUp');
             notification.style.display = 'block';
