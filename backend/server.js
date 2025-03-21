@@ -6,24 +6,12 @@ import router from "./userRoutes.js";
 import twilio from "twilio";
 
 const app = express();
-
-// Connect to MongoDB
-(async () => {
-  try {
-    await connectDB();
-    console.log("Connected to MongoDB");
-  } catch (error) {
-    console.error("MongoDB connection error:", error);
-  }
-})();
+connectDB();
 
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-// app.set("trust proxy", 1);
-
-
 app.use(
   cors({
     origin: "*", // Allow all origins (for development)
@@ -38,9 +26,7 @@ app.get("/", (req, res) => {
 });
 
 // Twilio setup
-
 const client = twilio(process.env.TWILIO_SID, process.env.TWILIO_AUTH_TOKEN);
-
 const sosMessages = [
   "Dad is feeling very weak. Please call as soon as possible! 💔",
   "Mom is having chest pain! Urgent help needed! 🚑",
@@ -53,7 +39,6 @@ const sosMessages = [
   "Severe pain in joints, can't stand properly. Urgent help needed! 😥",
   "I'm scared and feeling uneasy. Please check on me soon. 😓",
 ];
-
 app.post("/send-sos", async (req, res) => {
   try {
     const randomMessage =
