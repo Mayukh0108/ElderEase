@@ -5,45 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elder Ease Accessibility</title>
     <style>
-      /* Base Styles */
-      body {
-        font-family: Arial, sans-serif;
+      /* Base Styles from pagestyle.css */
+      * {
         margin: 0;
         padding: 0;
-        background-color: #fff3e6;
-        color: #333;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      
+      :root {
+        /* Color palette from pagestyle.css */
+        --primary-color: #2980b9;
+        --primary-light: #3498db;
+        --primary-lighter: #a6d0f5;
+        --primary-dark: #1a5889;
+        --secondary-color: #f8f9fa;
+        --text-dark: #2c3e50;
+        --text-light: #f8f9fa;
+        --text-muted: #6c757d;
+        --background-light: #ffffff;
+        --background-off-white: #f1f7fc;
+        --border-color: #e0e0e0;
+        --success-color: #27ae60;
+        --warning-color: #e74c3c;
+      }
+      
+      body {
+        background-color: var(--background-light);
+        color: var(--text-dark);
+        line-height: 1.6;
         transition: background-color 0.3s, color 0.3s;
       }
 
+      /* Dark Theme */
       body.dark-theme {
-        background-color: #333;
-        color: #fff3e6;
+        background-color: var(--text-dark);
+        color: var(--text-light);
       }
 
       body.dark-theme header {
-        background: linear-gradient(135deg, #8b008b, #4b0082);
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
       }
 
       body.dark-theme button {
-        background: linear-gradient(135deg, #8b008b, #4b0082);
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
       }
 
       body.dark-theme select {
-        background-color: #9932cc;
+        background-color: var(--primary-dark);
+        color: var(--text-light);
       }
 
       body.dark-theme .notifications {
-        background: linear-gradient(135deg, #4b0082, #8b008b);
-        color: white;
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+        color: var(--text-light);
       }
 
       body.dark-theme footer {
-        background: linear-gradient(135deg, #8b008b, #4b0082);
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+      }
+
+      body.dark-theme .notification {
+        background-color: rgba(41, 58, 74, 0.9);
+        color: var(--text-light);
       }
 
       header {
-        background: linear-gradient(135deg, #ff69b4, #ff1493);
-        color: white;
+        background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+        color: var(--text-light);
         padding: 20px;
         text-align: center;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -51,80 +80,77 @@
 
       header h1 {
         margin: 0;
+        font-size: 2.2rem;
       }
 
       .controls {
-        margin-top: 10px;
+        margin-top: 15px;
         display: flex;
         justify-content: center;
-        gap: 10px;
+        gap: 15px;
         flex-wrap: wrap;
       }
 
       button,
       select {
-        padding: 10px;
+        padding: 12px 20px;
         margin: 5px;
         border: none;
-        border-radius: 5px;
+        border-radius: 8px;
         cursor: pointer;
-        transition: background-color 0.3s, transform 0.3s;
-      }
-
-      /* Dark Theme */
-      body.dark-theme {
-        background-color: #333;
-        color: #fff3e6;
-      }
-
-      body.dark-theme header {
-        background: linear-gradient(135deg, #8b008b, #4b0082);
-      }
-
-      body.dark-theme button {
-        background: linear-gradient(135deg, #8b008b, #4b0082);
-      }
-
-      body.dark-theme select {
-        background-color: #9932cc;
-      }
-
-      body.dark-theme .notifications {
-        background: linear-gradient(135deg, #4b0082, #8b008b);
-        color: white;
-      }
-
-      body.dark-theme footer {
-        background: linear-gradient(135deg, #8b008b, #4b0082);
-      }
-
-      /* Night Vision Mode for Camera Only */
-      .camera-feed.night-vision {
-        filter: grayscale(100%) brightness(0.5) contrast(2);
+        transition: all 0.3s ease;
+        font-weight: 600;
+        font-size: 1rem;
       }
 
       button {
-        background: linear-gradient(135deg, #ff1493, #ff69b4);
-        color: white;
+        background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+        color: var(--text-light);
+        display: flex;
+        align-items: center;
+        gap: 10px;
       }
 
       button:hover {
-        background: linear-gradient(135deg, #ff69b4, #ff1493);
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
         transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
 
       select {
-        background-color: #ffb6c1;
+        background-color: var(--background-off-white);
+        border: 1px solid var(--border-color);
+        color: var(--text-dark);
+        font-size: 1rem;
+      }
+
+      select:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
       }
 
       main {
-        padding: 20px;
+        padding: 30px;
         max-width: 1200px;
         margin: 0 auto;
       }
 
-      .camera-section {
+      .section-title {
+        font-size: 1.8rem;
         margin-bottom: 20px;
+        color: var(--primary-color);
+        font-weight: 600;
+        border-left: 4px solid var(--primary-color);
+        padding-left: 15px;
+      }
+
+      .camera-section {
+        margin-bottom: 30px;
+        background-color: var(--background-off-white);
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
       }
 
       .camera-feed {
@@ -134,9 +160,9 @@
         max-width: 100%;
         margin: 0 auto;
         background-color: #000;
-        border-radius: 10px;
+        border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
       }
 
       video,
@@ -160,59 +186,66 @@
       /* Face Detection Box */
       .face-box {
         position: absolute;
-        width: 200px; /* Adjust width as needed */
-        height: 200px; /* Adjust height as needed */
-        border: 3px solid red;
+        width: 200px;
+        height: 200px;
+        border: 3px solid var(--warning-color);
         background: transparent;
         display: none;
-        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5); /* Optional: Add a glow effect */
+        box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
       }
 
       .camera-controls {
-        text-align: center;
-        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 20px;
       }
 
       .snapshot-gallery {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 20px;
+        gap: 15px;
+        margin-top: 25px;
+        justify-content: center;
       }
 
       .snapshot-gallery img {
         width: 150px;
         height: auto;
-        border: 2px solid #ff69b4;
-        border-radius: 5px;
+        border: 2px solid var(--primary-light);
+        border-radius: 8px;
         transition: transform 0.3s;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
 
       .snapshot-gallery img:hover {
         transform: scale(1.1);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
       }
 
       .notifications {
-        background: linear-gradient(135deg, #ffe4e1, #ffb6c1);
-        padding: 20px;
-        border-radius: 10px;
-        margin-top: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        max-height: 200px;
+        background: linear-gradient(135deg, var(--background-off-white), var(--primary-lighter));
+        padding: 25px;
+        border-radius: 12px;
+        margin-top: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        max-height: 300px;
         overflow-y: auto;
       }
 
       #notification-area {
-        margin-top: 10px;
+        margin-top: 15px;
       }
 
       .notification {
         background-color: rgba(255, 255, 255, 0.9);
-        padding: 10px;
-        border-radius: 5px;
-        margin-bottom: 10px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         animation: fadeIn 0.5s ease-in-out;
+        border-left: 4px solid var(--primary-color);
       }
 
       @keyframes fadeIn {
@@ -228,17 +261,71 @@
 
       footer {
         text-align: center;
-        padding: 10px;
-        background: linear-gradient(135deg, #ff69b4, #ff1493);
+        padding: 15px;
+        background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
         color: white;
         position: fixed;
         bottom: 0;
         width: 100%;
       }
 
-      /* Night Vision Mode for Camera Only */
-      .night-vision .camera-feed {
-        filter: grayscale(100%) brightness(0.5) contrast(2);
+      /* SOS Button from pagestyle.css */
+      .sos-button {
+        position: fixed;
+        bottom: 6rem;
+        right: 2rem;
+        background: var(--warning-color);
+        color: white;
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+        border: 3px solid white;
+        animation: pulse 2s infinite;
+        z-index: 1000;
+      }
+      
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
+        }
+        70% {
+          transform: scale(1.05);
+          box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+        }
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        header h1 {
+          font-size: 1.8rem;
+        }
+        
+        .controls {
+          flex-direction: column;
+          align-items: center;
+        }
+        
+        button, select {
+          width: 100%;
+          max-width: 300px;
+        }
+        
+        .camera-feed {
+          height: 350px;
+        }
       }
     </style>
   </head>
@@ -246,20 +333,45 @@
     <header>
       <h1>Elder Ease Accessibility</h1>
       <div class="controls">
-        <button id="theme-toggle">Toggle Theme</button>
+        <button id="theme-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          Toggle Theme
+        </button>
         <select id="font-size">
           <option value="16px">Normal Font</option>
           <option value="20px">Large Font</option>
           <option value="24px">Extra Large Font</option>
         </select>
-        <button id="night-vision-toggle">Night Vision</button>
-        <button id="start-recording">Start Recording</button>
+        <button id="night-vision-toggle">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 11.78a8 8 0 1 0-11.94 0" />
+            <path d="M17.5 7.5l.5.5-2 2" />
+            <path d="M20 11h2" />
+            <path d="M19 4l1 1" />
+            <path d="M12 2v2" />
+            <path d="M5 4l-1 1" />
+            <path d="M2 11h2" />
+            <path d="M10 8.12A3 3 0 0 1 10.88 10" />
+            <path d="M17.7 7.7a2.5 2.5 0 0 1 0 3.54" />
+            <path d="M7.7 7.7a2.5 2.5 0 0 0 0 3.54" />
+          </svg>
+          Night Vision
+        </button>
+        <button id="start-recording">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10" />
+            <circle cx="12" cy="12" r="3" fill="currentColor" />
+          </svg>
+          Start Recording
+        </button>
       </div>
     </header>
 
     <main>
       <section class="camera-section">
-        <h2>Live CCTV Feed</h2>
+        <h2 class="section-title">Live CCTV Feed</h2>
         <div class="camera-feed">
           <video id="live-camera" autoplay></video>
           <canvas id="motion-canvas"></canvas>
@@ -267,18 +379,52 @@
           <div id="face-box" class="face-box"></div>
         </div>
         <div class="camera-controls">
-          <button id="capture-snapshot">Capture Snapshot</button>
-          <button id="detect-motion">Detect Motion</button>
-          <button id="detect-face">Detect Face</button>
+          <button id="capture-snapshot">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+              <circle cx="12" cy="13" r="4" />
+            </svg>
+            Capture Snapshot
+          </button>
+          <button id="detect-motion">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 12a8 8 0 0 1 8-8" />
+              <path d="M20 12a8 8 0 0 1-8 8" />
+              <path d="M12 2v2" />
+              <path d="M12 20v2" />
+              <path d="m4.93 4.93 1.41 1.41" />
+              <path d="m17.66 17.66 1.41 1.41" />
+              <path d="M2 12h2" />
+              <path d="M20 12h2" />
+              <path d="m6.34 17.66-1.41 1.41" />
+              <path d="m19.07 4.93-1.41 1.41" />
+            </svg>
+            Detect Motion
+          </button>
+          <button id="detect-face">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="5" />
+              <path d="M20 21a8 8 0 1 0-16 0" />
+            </svg>
+            Detect Face
+          </button>
         </div>
         <div class="snapshot-gallery" id="snapshot-gallery"></div>
       </section>
 
       <section class="notifications">
-        <h2>Notifications</h2>
+        <h2 class="section-title">Notifications</h2>
         <div id="notification-area"></div>
       </section>
     </main>
+
+    <div class="sos-button">
+      SOS
+    </div>
+
+    <footer>
+      &copy; 2025 Elder Ease. All rights reserved.
+    </footer>
 
     <script>
       const themeToggle = document.getElementById("theme-toggle");
