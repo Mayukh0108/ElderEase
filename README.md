@@ -1,5 +1,10 @@
 # ElderEase
 
+# ElderEase Deployment Link 
+
+- Frontend Deployment : https://poetic-salmiakki-6e36ca.netlify.app/
+- Backend Deployment : https://elderlycarebackend.onrender.com/api/user/me
+
 
 # ElderEase 👴👵 - AI-Powered Elderly Care & Safety Companion
 
